@@ -1,0 +1,29 @@
+{
+  "version": "1.2.3",
+  "status": "CAP0_PASS",
+  "canonicalWindowsPath": "C:\\Projects\\Mumbai Civic Lens\\mumbai-civic-lens",
+  "apiPort": 8080,
+  "rustToolchain": "stable; host-resolved rustc 1.85.0 (4d91de4e4 2025-02-17), cargo 1.85.0, x86_64-pc-windows-msvc; Cargo.lock resolved with MSRV-aware fallback (see audit/CAP0_REPORT.md)",
+  "frontendVersions": "exact pins in apps/web/package.json; resolved in pnpm-lock.yaml (lockfileVersion 9.0) by pnpm 11.28.9 on Node v22.14.0",
+  "databaseImage": "docker.io/postgis/postgis:17-3.5@sha256:01a6a70e41e6c4467c8f55f6063555ed72db2d6662cd0d571040d42eadaeb6f6",
+  "claudeModels": "capability-based; human-visible selector 2026-11-20: Opus 5.5, Sonnet 5, Haiku 4.5, Haiku 5.5, Sonnet 5.5 (not command evidence)",
+  "hostEvidence": {
+    "capturedOn": "2026-11-20",
+    "git": "2.51.2.windows.1",
+    "windows": "Windows 11 Enterprise 10.0.22631.6649 (build 22631, 64-bit)",
+    "wsl": "3.0.5.0; kernel 6.18.58.1-1 (updated from 2.3.24.0 during CAP-0); networkingMode=nat (WSL fell back to Consomme)",
+    "podman": "6.1.4; machine podman-machine-default (wsl, rootless, cgroup v2, rootlessNetworkCmd pasta); compose provider podman-compose 1.6.0",
+    "node": "v22.14.0",
+    "pnpm": "11.28.9",
+    "python": "3.13.1 (PyYAML 6.0.3, jsonschema 4.24.0)",
+    "postgresql": "17.5 (Debian 17.5-1.pgdg110+1)",
+    "postgis": "3.5.2 dea6d0a; GEOS 3.9.0; PROJ 7.2.1",
+    "srid32643": "present in spatial_ref_sys (EPSG:32643, WGS 84 / UTM zone 43N)",
+    "lockfiles": ["Cargo.lock", "pnpm-lock.yaml"],
+    "imageReference": "docker.io/postgis/postgis:17-3.5",
+    "imageId": "2ed748fc602dd3031c6724db8cb289e1578c2deb552a4f6e291f6f7e5e6e4f69",
+    "imageIndexDigest": "sha256:01a6a70e41e6c4467c8f55f6063555ed72db2d6662cd0d571040d42eadaeb6f6",
+    "imagePlatformDigest": "sha256:8dfee83d8bd4c2873dc4a233c13ba2799a44f2edb16a0552d58715917fac32ba",
+    "runningContainerImageId": "2ed748fc602dd3031c6724db8cb289e1578c2deb552a4f6e291f6f7e5e6e4f69"
+  }
+}

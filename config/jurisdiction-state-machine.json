@@ -1,0 +1,104 @@
+{
+  "machineId": "JURISDICTION",
+  "version": "1.2.3",
+  "transitions": [
+    {
+      "from": "UNKNOWN",
+      "to": "SPATIALLY_INFERRED_PROVISIONAL",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "JURISDICTION_SPATIALLY_INFERRED_PROVISIONAL",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "SPATIALLY_INFERRED_PROVISIONAL",
+      "to": "CONFIRMED_BMC_WARD",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "JURISDICTION_CONFIRMED_BMC_WARD",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "SPATIALLY_INFERRED_PROVISIONAL",
+      "to": "EXTERNAL_AGENCY_ASSIGNED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "JURISDICTION_EXTERNAL_AGENCY_ASSIGNED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "SPATIALLY_INFERRED_PROVISIONAL",
+      "to": "CONFLICT_DISPUTED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "JURISDICTION_CONFLICT_DISPUTED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "CONFLICT_DISPUTED",
+      "to": "CONFIRMED_BMC_WARD",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "JURISDICTION_CONFIRMED_BMC_WARD",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "CONFLICT_DISPUTED",
+      "to": "EXTERNAL_AGENCY_ASSIGNED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "JURISDICTION_EXTERNAL_AGENCY_ASSIGNED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "EXTERNAL_AGENCY_ASSIGNED",
+      "to": "HANDOFF_LOGGED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "JURISDICTION_HANDOFF_LOGGED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+.env.local
+.env.*.local
+node_modules/
+target/
+dist/
+coverage/
+playwright-report/
+test-results/
+__pycache__/
+*.pyc
+*.pyo
+*.pem
+*.key
+
+# Hackathon pipeline: derived/intermediate artefacts must never be committed
+pipeline/out/
+pipeline/**/*.csv
+pipeline/**/*.jsonl
+pipeline/**/*.parquet
+external-inputs/
+judge-exports/
+batches/
+*.sha256.tmp
+
+# Local demo launcher state (PIDs, logs)
+.demo-run/

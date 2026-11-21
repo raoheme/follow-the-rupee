@@ -1,0 +1,16 @@
+[
+  {
+    "id": "SYN-DEMO-CON-001",
+    "tenderId": "SYN-DEMO-TND-001",
+    "budgetId": "SYN-DEMO-BUD-001",
+    "vendorId": "SYN-DEMO-VND-001",
+    "displayTitle": "Synthetic CC-road rehabilitation contract, Paliram Road segment",
+    "contractStatus": "COMPLETED_IN_DLP",
+    "awardedOn": "2025-08-05",
+    "valuePaise": 180000000,
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

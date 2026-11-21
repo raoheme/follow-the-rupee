@@ -1,0 +1,42 @@
+{
+  "version": "1.2.3",
+  "label": "DEMONSTRATION_HEURISTIC_V1",
+  "weights": {
+    "sameAssetOrSegment": 40,
+    "sameCategory": 20,
+    "withinConfiguredRadius": 20,
+    "withinConfiguredWindow": 10,
+    "keywordOverlap": 10
+  },
+  "thresholds": {
+    "likelySame": [
+      80,
+      100
+    ],
+    "possible": [
+      55,
+      79
+    ],
+    "probablyDistinct": [
+      0,
+      54
+    ]
+  },
+  "categoryPolicies": {
+    "POTHOLE": {
+      "radiusMeters": 20,
+      "windowHours": 720,
+      "considerCarriagewaySide": true
+    },
+    "WATERLOGGING": {
+      "radiusMeters": 150,
+      "windowHours": 12
+    }
+  },
+  "choices": [
+    "ENDORSE_EXISTING",
+    "ADD_EVIDENCE_TO_EXISTING",
+    "CREATE_SEPARATE_ISSUE"
+  ],
+  "silentRejectionForbidden": true
+}

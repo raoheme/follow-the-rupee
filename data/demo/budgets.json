@@ -1,0 +1,36 @@
+[
+  {
+    "id": "SYN-DEMO-BUD-001",
+    "displayTitle": "Synthetic carriageway rehabilitation allocation, K/West Ward (Paliram Road corridor context)",
+    "budgetBookName": "Synthetic Budget Book A (Roads and Traffic)",
+    "budgetHead": "Synthetic head: Roads, carriageway rehabilitation",
+    "amountPaise": 250000000,
+    "financialYear": "2026-27",
+    "departmentId": "SYN-DEMO-DEPT-ROADS",
+    "traceabilityStatus": "LINKED_TO_STREET",
+    "lastProvenLink": "ASSET_GEOMETRY",
+    "missingNextLink": null,
+    "traceabilityExplanation": "Budget allocation, tender, contract, work order and a street-level asset geometry are all present in this synthetic chain.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-BUD-002",
+    "displayTitle": "Synthetic junction and corridor improvement allocation (JP Road Metro Corridor context)",
+    "budgetBookName": "Synthetic Budget Book A (Roads and Traffic)",
+    "budgetHead": "Synthetic head: Roads, junction and corridor improvements",
+    "amountPaise": 120000000,
+    "financialYear": "2026-27",
+    "departmentId": "SYN-DEMO-DEPT-ROADS",
+    "traceabilityStatus": "GAP_BEFORE_STREET_GEOMETRY",
+    "lastProvenLink": "TENDER",
+    "missingNextLink": "STREET_LEVEL_GEOMETRY",
+    "traceabilityExplanation": "TRACEABILITY GAP: Street-level geometry is not available in the synthetic source record. The last proven link is the tender; the next link, a street-level asset geometry, is missing. This is an evidence gap in synthetic data, not an allegation.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

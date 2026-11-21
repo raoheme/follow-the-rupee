@@ -1,0 +1,174 @@
+{
+  "machineId": "WORK",
+  "version": "1.2.3",
+  "transitions": [
+    {
+      "from": "BUDGETED_PROPOSED",
+      "to": "TENDER_PUBLISHED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_TENDER_PUBLISHED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "TENDER_PUBLISHED",
+      "to": "CONTRACT_AWARDED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_CONTRACT_AWARDED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "TENDER_PUBLISHED",
+      "to": "RETENDER_REQUIRED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_RETENDER_REQUIRED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "RETENDER_REQUIRED",
+      "to": "TENDER_PUBLISHED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_TENDER_PUBLISHED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "CONTRACT_AWARDED",
+      "to": "WORK_ORDER_ISSUED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_WORK_ORDER_ISSUED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "WORK_ORDER_ISSUED",
+      "to": "IN_EXECUTION",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_IN_EXECUTION",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "IN_EXECUTION",
+      "to": "SUSPENDED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_SUSPENDED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "SUSPENDED",
+      "to": "IN_EXECUTION",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_IN_EXECUTION",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "IN_EXECUTION",
+      "to": "COMPLETION_CERTIFIED_IN_DLP",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_COMPLETION_CERTIFIED_IN_DLP",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "COMPLETION_CERTIFIED_IN_DLP",
+      "to": "DEFECT_NOTIFIED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_DEFECT_NOTIFIED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "DEFECT_NOTIFIED",
+      "to": "IN_EXECUTION",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_IN_EXECUTION",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "COMPLETION_CERTIFIED_IN_DLP",
+      "to": "DLP_EXPIRED_ARCHIVED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "WORK_DLP_EXPIRED_ARCHIVED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    }
+  ]
+}

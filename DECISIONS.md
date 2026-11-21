@@ -1,0 +1,2 @@
+# Frozen decisions
+React 18 + TypeScript + Vite; direct Leaflet behind CivicMapAdapter. Rust/Axum/Tokio/SQLx modular monolith. PostgreSQL/PostGIS. Rootless Podman hosts DB only in normal development. API port 8080. OpenAPI YAML is authoritative; Utoipa deferred. K/West primary synthetic scope; G/North/M/East comparison labels. Six journeys; 18 logical contracts compressed into 12 pages. Deterministic 40/20/20/10/10 dedup. Fixture media only.

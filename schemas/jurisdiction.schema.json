@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "jurisdiction",
+  "required": [
+    "id",
+    "recordNature",
+    "sourceTier",
+    "recordVersion",
+    "updatedAt",
+    "issueId",
+    "status",
+    "spatialMatchMethod",
+    "distanceToBoundaryMeters",
+    "candidateWardId",
+    "externalAgencyLabel",
+    "confirmationBasis",
+    "sourceConflictNote",
+    "legalOwnershipAsserted",
+    "confidenceNote",
+    "establishedAt"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "recordNature": {
+      "const": "SYNTHETIC_DEMONSTRATION"
+    },
+    "sourceTier": {
+      "enum": [
+        "SYNTHETIC_DEMO",
+        "COMMUNITY_REFERENCE",
+        "OFFICIAL_SOURCE_PENDING"
+      ]
+    },
+    "recordVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "issueId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "status": {
+      "enum": [
+        "UNKNOWN",
+        "SPATIALLY_INFERRED_PROVISIONAL",
+        "CONFIRMED_BMC_WARD",
+        "EXTERNAL_AGENCY_ASSIGNED",
+        "CONFLICT_DISPUTED",
+        "HANDOFF_LOGGED"
+      ]
+    },
+    "spatialMatchMethod": {
+      "enum": [
+        "ST_COVERS",
+        "ST_INTERSECTS",
+        "NONE"
+      ]
+    },
+    "distanceToBoundaryMeters": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "candidateWardId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "externalAgencyLabel": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "confirmationBasis": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "sourceConflictNote": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "legalOwnershipAsserted": {
+      "const": false
+    },
+    "confidenceNote": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "establishedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "CONFIRMED_BMC_WARD"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "confirmationBasis": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "SPATIALLY_INFERRED_PROVISIONAL",
+              "CONFLICT_DISPUTED"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "confirmationBasis": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

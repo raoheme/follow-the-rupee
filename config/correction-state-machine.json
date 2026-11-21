@@ -1,0 +1,76 @@
+{
+  "machineId": "CORRECTION",
+  "version": "1.2.3",
+  "transitions": [
+    {
+      "from": "CHALLENGE_SUBMITTED",
+      "to": "UNDER_REVIEW",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "CORRECTION_UNDER_REVIEW",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "UNDER_REVIEW",
+      "to": "ACCEPTED_AMENDED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "CORRECTION_ACCEPTED_AMENDED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "UNDER_REVIEW",
+      "to": "REJECTED_WITH_REASON",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "CORRECTION_REJECTED_WITH_REASON",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "REJECTED_WITH_REASON",
+      "to": "APPEAL_SUBMITTED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "CORRECTION_APPEAL_SUBMITTED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "APPEAL_SUBMITTED",
+      "to": "UNDER_REVIEW",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "CORRECTION_UNDER_REVIEW",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    }
+  ]
+}

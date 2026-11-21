@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "correction",
+  "required": [
+    "id",
+    "recordNature",
+    "sourceTier",
+    "recordVersion",
+    "updatedAt",
+    "entityId",
+    "fieldPath",
+    "priorValue",
+    "proposedValue",
+    "status",
+    "reason",
+    "submittedAt",
+    "adjudicationNote",
+    "appealNote",
+    "priorValuePreserved"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "recordNature": {
+      "const": "SYNTHETIC_DEMONSTRATION"
+    },
+    "sourceTier": {
+      "enum": [
+        "SYNTHETIC_DEMO",
+        "COMMUNITY_REFERENCE",
+        "OFFICIAL_SOURCE_PENDING"
+      ]
+    },
+    "recordVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "entityId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "fieldPath": {
+      "type": "string",
+      "pattern": "^/[A-Za-z0-9/_-]+$"
+    },
+    "priorValue": {},
+    "proposedValue": {},
+    "status": {
+      "enum": [
+        "CHALLENGE_SUBMITTED",
+        "UNDER_REVIEW",
+        "ACCEPTED_AMENDED",
+        "REJECTED_WITH_REASON",
+        "APPEAL_SUBMITTED"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "submittedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "adjudicationNote": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "appealNote": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "priorValuePreserved": {
+      "const": true
+    }
+  }
+}

@@ -1,0 +1,216 @@
+[
+  {
+    "id": "SYN-DEMO-KND-001",
+    "title": "Pothole-like surface break near a joint, Paliram Road",
+    "publicDescription": "Synthetic report of a surface break near a joint on the rehabilitated Paliram Road segment. The authority has claimed the repair is complete; the claim awaits citizen verification.",
+    "category": "POTHOLE",
+    "status": "CLOSURE_CLAIMED_PENDING_VERIFICATION",
+    "publicStatusExplanation": "Completion is claimed, not verified. Silence does not verify closure; a citizen verdict or independent review is still needed.",
+    "reportedAt": "2026-10-05T04:15:00Z",
+    "streetName": "Paliram Road",
+    "nearbyLandmark": "near S.V. Road Junction (synthetic label)",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.8315,
+        19.1197
+      ]
+    },
+    "assetId": "SYN-DEMO-AST-ROAD-001",
+    "workOrderId": "SYN-DEMO-WO-001",
+    "wardCandidateId": "SYN-DEMO-WARD-KW",
+    "responsibleDepartmentId": "SYN-DEMO-DEPT-ROADS",
+    "responsiblePostTitle": "Assistant Engineer (Roads), K/West Ward",
+    "escalationPostTitle": "Executive Engineer (Roads)",
+    "parentRecurrenceId": null,
+    "journeys": [
+      "J1",
+      "J5"
+    ],
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-KND-002",
+    "title": "Pothole reported near S.V. Road Junction approach",
+    "publicDescription": "Synthetic citizen report close to an existing report, used to demonstrate the duplicate check and its three choices.",
+    "category": "POTHOLE",
+    "status": "SUBMITTED_UNVERIFIED",
+    "publicStatusExplanation": "Submitted and unverified. A near match may exist; endorse it, add evidence, or create a separate report.",
+    "reportedAt": "2026-11-19T05:20:00Z",
+    "streetName": "Paliram Road",
+    "nearbyLandmark": "near S.V. Road Junction approach (synthetic label)",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.83158,
+        19.11974
+      ]
+    },
+    "assetId": "SYN-DEMO-AST-ROAD-001",
+    "workOrderId": null,
+    "wardCandidateId": "SYN-DEMO-WARD-KW",
+    "responsibleDepartmentId": "SYN-DEMO-DEPT-ROADS",
+    "responsiblePostTitle": "Assistant Engineer (Roads), K/West Ward",
+    "escalationPostTitle": "Executive Engineer (Roads)",
+    "parentRecurrenceId": null,
+    "journeys": [
+      "J2"
+    ],
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-KND-003",
+    "title": "Waterlogging pocket beside the JP Road Metro Corridor service lane",
+    "publicDescription": "Synthetic waterlogging report whose responsible agency is uncertain: ward inference and a legacy source row disagree.",
+    "category": "WATERLOGGING",
+    "status": "TRIAGED_ASSIGNED",
+    "publicStatusExplanation": "Triaged. Jurisdiction is disputed between sources and remains uncertain until an authority resolves it.",
+    "reportedAt": "2026-11-12T03:40:00Z",
+    "streetName": "JP Road service lane",
+    "nearbyLandmark": "near JP Road Metro Corridor pillar cluster (synthetic label)",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            72.833,
+            19.12
+          ],
+          [
+            72.834,
+            19.12
+          ],
+          [
+            72.834,
+            19.121
+          ],
+          [
+            72.833,
+            19.121
+          ],
+          [
+            72.833,
+            19.12
+          ]
+        ]
+      ]
+    },
+    "assetId": "SYN-DEMO-AST-DRAIN-001",
+    "workOrderId": null,
+    "wardCandidateId": "SYN-DEMO-WARD-KW",
+    "responsibleDepartmentId": "SYN-DEMO-DEPT-SWD",
+    "responsiblePostTitle": "Assistant Engineer (Storm Water Drains), K/West Ward",
+    "escalationPostTitle": "Executive Engineer (Storm Water Drains)",
+    "parentRecurrenceId": null,
+    "journeys": [
+      "J4",
+      "J6"
+    ],
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-KND-004",
+    "title": "Recurring surface break on the same Paliram Road segment",
+    "publicDescription": "Synthetic defect on the same segment as the rehabilitation work order but not yet linked to it. A potential DLP warranty path should be checked.",
+    "category": "POTHOLE",
+    "status": "TRIAGED_ASSIGNED",
+    "publicStatusExplanation": "Triaged but not linked to any work order. An active DLP period may apply; link the work order before proposing fresh spend.",
+    "reportedAt": "2026-11-10T06:05:00Z",
+    "streetName": "Paliram Road",
+    "nearbyLandmark": "near S.V. Road Junction (synthetic label)",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.8321,
+        19.1201
+      ]
+    },
+    "assetId": "SYN-DEMO-AST-ROAD-001",
+    "workOrderId": null,
+    "wardCandidateId": "SYN-DEMO-WARD-KW",
+    "responsibleDepartmentId": "SYN-DEMO-DEPT-ROADS",
+    "responsiblePostTitle": "Assistant Engineer (Roads), K/West Ward",
+    "escalationPostTitle": "Executive Engineer (Roads)",
+    "parentRecurrenceId": null,
+    "journeys": [
+      "J3"
+    ],
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-KND-005",
+    "title": "Scale preview: road surface break, Dharavi locality label",
+    "publicDescription": "Lightweight synthetic record proving the model scales to G/North. Not a full journey.",
+    "category": "POTHOLE",
+    "status": "SUBMITTED_UNVERIFIED",
+    "publicStatusExplanation": "Submitted and unverified; scale-preview record only.",
+    "reportedAt": "2026-11-17T04:00:00Z",
+    "streetName": "Synthetic preview road, Dharavi locality label",
+    "nearbyLandmark": "near a synthetic Dharavi locality marker",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.8545,
+        19.0433
+      ]
+    },
+    "assetId": "SYN-DEMO-AST-ROAD-002",
+    "workOrderId": null,
+    "wardCandidateId": "SYN-DEMO-WARD-GN",
+    "responsibleDepartmentId": "SYN-DEMO-DEPT-ROADS",
+    "responsiblePostTitle": "Assistant Engineer (Roads), G/North Ward",
+    "escalationPostTitle": "Executive Engineer (Roads)",
+    "parentRecurrenceId": null,
+    "journeys": [
+      "PREVIEW"
+    ],
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-KND-006",
+    "title": "Scale preview: drain blockage, Govandi locality label",
+    "publicDescription": "Lightweight synthetic record proving the model scales to M/East. Not a full journey.",
+    "category": "DRAIN_BLOCKAGE",
+    "status": "SUBMITTED_UNVERIFIED",
+    "publicStatusExplanation": "Submitted and unverified; scale-preview record only.",
+    "reportedAt": "2026-11-18T04:30:00Z",
+    "streetName": "Synthetic preview drain, Govandi locality label",
+    "nearbyLandmark": "near a synthetic Shivaji Nagar locality marker",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.9245,
+        19.0533
+      ]
+    },
+    "assetId": "SYN-DEMO-AST-DRAIN-002",
+    "workOrderId": null,
+    "wardCandidateId": "SYN-DEMO-WARD-ME",
+    "responsibleDepartmentId": "SYN-DEMO-DEPT-SWD",
+    "responsiblePostTitle": "Assistant Engineer (Storm Water Drains), M/East Ward",
+    "escalationPostTitle": "Executive Engineer (Storm Water Drains)",
+    "parentRecurrenceId": null,
+    "journeys": [
+      "PREVIEW"
+    ],
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

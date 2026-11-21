@@ -1,0 +1,132 @@
+{
+  "machineId": "VERIFICATION",
+  "version": "1.2.3",
+  "transitions": [
+    {
+      "from": "AWAITING_AUTHORITY_CLAIM",
+      "to": "WINDOW_OPEN",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "VERIFICATION_WINDOW_OPEN",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "WINDOW_OPEN",
+      "to": "CITIZEN_CONFIRMED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "VERIFICATION_CITIZEN_CONFIRMED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "WINDOW_OPEN",
+      "to": "CITIZEN_PARTLY_FIXED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "VERIFICATION_CITIZEN_PARTLY_FIXED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "WINDOW_OPEN",
+      "to": "CITIZEN_DISPUTED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "VERIFICATION_CITIZEN_DISPUTED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "WINDOW_OPEN",
+      "to": "WINDOW_EXPIRED_NO_VERDICT",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "VERIFICATION_WINDOW_EXPIRED_NO_VERDICT",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "WINDOW_EXPIRED_NO_VERDICT",
+      "to": "INDEPENDENT_REVIEW_PENDING",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "VERIFICATION_INDEPENDENT_REVIEW_PENDING",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "INDEPENDENT_REVIEW_PENDING",
+      "to": "INDEPENDENTLY_VERIFIED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "VERIFICATION_INDEPENDENTLY_VERIFIED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "INDEPENDENT_REVIEW_PENDING",
+      "to": "CITIZEN_DISPUTED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "VERIFICATION_CITIZEN_DISPUTED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "CITIZEN_DISPUTED",
+      "to": "WINDOW_OPEN",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "VERIFICATION_WINDOW_OPEN",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    }
+  ]
+}

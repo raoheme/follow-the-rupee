@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "work-order",
+  "required": [
+    "id",
+    "recordNature",
+    "sourceTier",
+    "recordVersion",
+    "updatedAt",
+    "displayTitle",
+    "publicDescription",
+    "contractId",
+    "assetId",
+    "departmentId",
+    "valuePaise",
+    "startedOn",
+    "completionCertifiedOn",
+    "dlpEndsAt",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "recordNature": {
+      "const": "SYNTHETIC_DEMONSTRATION"
+    },
+    "sourceTier": {
+      "enum": [
+        "SYNTHETIC_DEMO",
+        "COMMUNITY_REFERENCE",
+        "OFFICIAL_SOURCE_PENDING"
+      ]
+    },
+    "recordVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "displayTitle": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "publicDescription": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "contractId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "assetId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "departmentId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "valuePaise": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "startedOn": {
+      "type": "string",
+      "format": "date"
+    },
+    "completionCertifiedOn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "dlpEndsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "BUDGETED_PROPOSED",
+        "TENDER_PUBLISHED",
+        "RETENDER_REQUIRED",
+        "CONTRACT_AWARDED",
+        "WORK_ORDER_ISSUED",
+        "IN_EXECUTION",
+        "SUSPENDED",
+        "COMPLETION_CERTIFIED_IN_DLP",
+        "DEFECT_NOTIFIED",
+        "DLP_EXPIRED_ARCHIVED"
+      ]
+    }
+  }
+}

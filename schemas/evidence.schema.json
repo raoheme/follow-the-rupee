@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "evidence",
+  "required": [
+    "id",
+    "recordNature",
+    "sourceTier",
+    "recordVersion",
+    "updatedAt",
+    "issueId",
+    "stage",
+    "caption",
+    "confidence",
+    "sourceType",
+    "capturedAt",
+    "locationConfidence",
+    "distanceToAssetMeters",
+    "mediaStatus",
+    "mediaRef",
+    "sha256",
+    "hashBasis",
+    "verificationState",
+    "processingState",
+    "caveat"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "recordNature": {
+      "const": "SYNTHETIC_DEMONSTRATION"
+    },
+    "sourceTier": {
+      "enum": [
+        "SYNTHETIC_DEMO",
+        "COMMUNITY_REFERENCE",
+        "OFFICIAL_SOURCE_PENDING"
+      ]
+    },
+    "recordVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "issueId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "stage": {
+      "enum": [
+        "BEFORE",
+        "CLAIMED_AFTER",
+        "DISPUTED_OR_RECURRING"
+      ]
+    },
+    "caption": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "confidence": {
+      "enum": [
+        "CITIZEN_SUBMITTED",
+        "AUTHORITY_SUBMITTED",
+        "INDEPENDENTLY_VERIFIED"
+      ]
+    },
+    "sourceType": {
+      "enum": [
+        "CITIZEN_FIXTURE",
+        "AUTHORITY_FIXTURE",
+        "INDEPENDENT_FIXTURE"
+      ]
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "locationConfidence": {
+      "enum": [
+        "LOCATION_CONSISTENT",
+        "LOCATION_UNVERIFIED",
+        "LOCATION_INCONSISTENT"
+      ]
+    },
+    "distanceToAssetMeters": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "mediaStatus": {
+      "const": "SYNTHETIC_FIXTURE_REFERENCE_ONLY"
+    },
+    "mediaRef": {
+      "type": "string",
+      "pattern": "^fixtures/evidence/SYN-DEMO-[A-Z0-9-]+\\.svg$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "hashBasis": {
+      "const": "FIXTURE_REFERENCE_STRING"
+    },
+    "verificationState": {
+      "enum": [
+        "NOT_VERIFIED",
+        "CORROBORATED",
+        "INDEPENDENTLY_VERIFIED"
+      ]
+    },
+    "processingState": {
+      "enum": [
+        "UPLOADED_QUARANTINE",
+        "PROCESSING",
+        "READY_FOR_REVIEW",
+        "PROCESSING_FAILED",
+        "MANUAL_REVIEW",
+        "PUBLISHED_PUBLIC",
+        "REJECTED"
+      ]
+    },
+    "caveat": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    }
+  }
+}

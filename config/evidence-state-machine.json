@@ -1,0 +1,90 @@
+{
+  "machineId": "EVIDENCE",
+  "version": "1.2.3",
+  "transitions": [
+    {
+      "from": "UPLOADED_QUARANTINE",
+      "to": "PROCESSING",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "EVIDENCE_PROCESSING",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "PROCESSING",
+      "to": "READY_FOR_REVIEW",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "EVIDENCE_READY_FOR_REVIEW",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "PROCESSING",
+      "to": "PROCESSING_FAILED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "EVIDENCE_PROCESSING_FAILED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "PROCESSING_FAILED",
+      "to": "MANUAL_REVIEW",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "EVIDENCE_MANUAL_REVIEW",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "MANUAL_REVIEW",
+      "to": "PUBLISHED_PUBLIC",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "EVIDENCE_PUBLISHED_PUBLIC",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "MANUAL_REVIEW",
+      "to": "REJECTED",
+      "allowedRoles": [
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "EVIDENCE_REJECTED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    }
+  ]
+}

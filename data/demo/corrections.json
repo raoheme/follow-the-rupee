@@ -1,0 +1,36 @@
+[
+  {
+    "id": "SYN-DEMO-COR-001",
+    "entityId": "SYN-DEMO-KND-003",
+    "fieldPath": "/jurisdiction/status",
+    "priorValue": "CONFIRMED_BMC_WARD",
+    "proposedValue": "SPATIALLY_INFERRED_PROVISIONAL",
+    "status": "APPEAL_SUBMITTED",
+    "reason": "Source conflict demonstration",
+    "submittedAt": "2026-11-13T05:00:00Z",
+    "adjudicationNote": "Rejected with reason: the legacy source row is retained as a conflicting source until an authority resolves jurisdiction.",
+    "appealNote": "Appeal submitted: the displayed confirmed-ward label should not outrank spatial inference without a resolution.",
+    "priorValuePreserved": true,
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-COR-002",
+    "entityId": "SYN-DEMO-KND-001",
+    "fieldPath": "/nearbyLandmark",
+    "priorValue": "near S.V. Rd junction (synthetic label)",
+    "proposedValue": "near S.V. Road Junction (synthetic label)",
+    "status": "ACCEPTED_AMENDED",
+    "reason": "Landmark label spelling clarified",
+    "submittedAt": "2026-10-20T05:00:00Z",
+    "adjudicationNote": "Accepted and amended. The prior label is preserved in this correction record and the audit timeline.",
+    "appealNote": null,
+    "priorValuePreserved": true,
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

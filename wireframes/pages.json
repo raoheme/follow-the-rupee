@@ -1,0 +1,283 @@
+{
+  "version": "1.2.3",
+  "logicalScreenCount": 18,
+  "implementationPageCount": 12,
+  "pages": [
+    {
+      "pageId": "PAGE-01",
+      "name": "Map/List Workspace",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-02",
+      "name": "Kundali Dossier",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-03",
+      "name": "Work/Budget Trace",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-04",
+      "name": "Report Issue",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-05",
+      "name": "Duplicate Decision",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-06",
+      "name": "Submission Receipt",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-07",
+      "name": "Resolution Verification",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-08",
+      "name": "Authority Command",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-09",
+      "name": "Jurisdiction/Work Link",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-10",
+      "name": "Completion/DLP",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-11",
+      "name": "Correction/Audit",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    },
+    {
+      "pageId": "PAGE-12",
+      "name": "Demo/Methodology",
+      "viewports": {
+        "mobile": "390x844",
+        "tablet": "768x1024",
+        "desktop": "1440x900"
+      },
+      "states": [
+        "loading",
+        "default",
+        "empty",
+        "partial-data",
+        "error"
+      ],
+      "accessibility": [
+        "keyboard",
+        "visible focus",
+        "44px target",
+        "non-color status"
+      ],
+      "disclosure": "persistent synthetic banner"
+    }
+  ]
+}

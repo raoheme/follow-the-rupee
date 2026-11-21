@@ -1,0 +1,10 @@
+{
+  "name": "mumbai-civic-lens",
+  "private": true,
+  "packageManager": "pnpm@11.28.9",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "test": "pnpm --filter web test"
+  }
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "SYN-DEMO-VND-001",
+    "displayName": "Demo Civic Works Consortium",
+    "organizationKind": "SYNTHETIC_ORGANIZATION",
+    "syntheticNote": "Invented organization for the demonstration; no real firm, record or performance data.",
+    "officialPerformanceRating": null,
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

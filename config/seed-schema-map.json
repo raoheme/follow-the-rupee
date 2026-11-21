@@ -1,0 +1,18 @@
+{
+  "wards": "ward",
+  "departments": "department",
+  "assets": "civic-asset",
+  "budgets": "budget-allocation",
+  "tenders": "tender",
+  "contractors": "contractor-record",
+  "contracts": "contract",
+  "work-orders": "work-order",
+  "dlp-status": "dlp-status",
+  "issues": "civic-issue",
+  "jurisdictions": "jurisdiction",
+  "evidence": "evidence",
+  "completion-claims": "completion-claim",
+  "verifications": "verification",
+  "corrections": "correction",
+  "lifecycle-events": "lifecycle-event"
+}

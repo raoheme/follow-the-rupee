@@ -1,0 +1,1 @@
+$tools=@("git","node","pnpm","rustc","cargo","podman","python");$m=@();foreach($t in $tools){if(-not(Get-Command $t -ErrorAction SilentlyContinue)){$m+=$t}};if($m.Count){Write-Error("Missing: "+($m -join ", "));exit 1};Write-Host "CAP-0 tool gate passed"

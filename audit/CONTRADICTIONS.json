@@ -1,0 +1,53 @@
+{
+  "version": "1.2.3",
+  "findings": [
+    {
+      "id": "CON-P1-001",
+      "severity": "MEDIUM",
+      "status": "RESOLVED",
+      "affectedFiles": [
+        "data/demo/*.json",
+        "migrations/0001_core.sql",
+        "docs/reference/MUMBAI_CIVIC_LENS_MASTER_REFERENCE_GUIDE.md"
+      ],
+      "conflict": "Identifier style: the physical v1.2.3 seeds use short ids (SYN-DEMO-KND-001, SYN-DEMO-BUD-001, SYN-DEMO-WO-001) while the supplementary v1.2.2 guide and the P1 brief example long forms (SYN-DEMO-KND-KW-2026-001, SYN-DEMO-BUD-2026-001).",
+      "resolution": "Master Director ruling: all existing HEAD primary ids are preserved unchanged and no alias fields are added. The traceability-gap budget follows the HEAD pattern: SYN-DEMO-BUD-002."
+    },
+    {
+      "id": "CON-P1-002",
+      "severity": "MEDIUM",
+      "status": "RESOLVED",
+      "affectedFiles": [
+        "data/demo/corrections.json",
+        "data/demo/jurisdictions.json",
+        "SPEC.md"
+      ],
+      "conflict": "SYN-DEMO-COR-001 (J6) challenges SYN-DEMO-KND-003 /jurisdiction/status from CONFIRMED_BMC_WARD to SPATIALLY_INFERRED_PROVISIONAL, while SPEC J4 starts that issue as an uncertain jurisdiction awaiting resolution.",
+      "resolution": "Bounded interpretation inside the frozen jurisdiction machine: the seeded record is CONFLICT_DISPUTED (a legacy source row says confirmed, spatial inference says provisional). It is visibly uncertain, J4 can resolve it live (CONFLICT_DISPUTED to CONFIRMED_BMC_WARD or EXTERNAL_AGENCY_ASSIGNED), and COR-001 keeps its prior value and appeal history."
+    },
+    {
+      "id": "CON-P1-003",
+      "severity": "LOW",
+      "status": "RESOLVED",
+      "affectedFiles": [
+        "data/demo/work-orders.json",
+        "data/demo/budgets.json"
+      ],
+      "conflict": "The P1 brief display concept mentions a 1.80 crore work order, but the frozen values are 25 lakh rupees (250000000 paise) budget and 18 lakh rupees (180000000 paise) work order. 1.80 crore would be 1800000000 paise.",
+      "resolution": "Frozen values are kept. Only integer paise is stored; rupee text is derived by a tested formatter in crates/domain (180000000 paise formats as 18 lakh)."
+    },
+    {
+      "id": "CON-P4-001",
+      "severity": "MEDIUM",
+      "status": "RESOLVED",
+      "affectedFiles": [
+        "scripts/validate_package.py",
+        "maps/",
+        "docs/reference/Municipal Operational Governance, Contracting Frameworks, and Technical Architecture.docx",
+        "PACKAGE_MANIFEST.json"
+      ],
+      "conflict": "scripts/validate_package.py reports PACKAGE INVALID for every physical file under the repository root that is not listed in PACKAGE_MANIFEST.json (it has no exclusion for maps/ or docs/reference). The P4 delta from the Master Director requires the downloaded Mumbai map packages under maps/ (about 272 MB) to stay untracked, uncommitted and unmanifested, and the user-supplied docs/reference/*.docx was added before P4 and is likewise unmanifested. The two instructions cannot both hold while those files sit inside the repository root: the validator gate fails on them although every P4 file is correctly manifested (a copy of the repository containing only the tracked and new P4 files validates as PACKAGE VALID).",
+      "resolution": "RESOLVED 2026-11-21: option (a) applied. Both items were moved out of the repository root and organized under C:\\Projects\\Mumbai Civic Lens\\external-inputs\\: the map packages (formerly maps/) at C:\\Projects\\Mumbai Civic Lens\\external-inputs\\geospatial\\osm-bombay and the .docx at C:\\Projects\\Mumbai Civic Lens\\external-inputs\reference. Nothing inside them was read, edited, committed or hash-pinned, and PACKAGE_MANIFEST.json carries no entry for them. `python scripts/validate_package.py` reports PACKAGE VALID (exit 0) in the real working tree with no validator change. The later GEO-01 feasibility task should read the packages from the osm-bombay path."
+    }
+  ]
+}

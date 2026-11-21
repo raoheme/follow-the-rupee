@@ -1,0 +1,1 @@
+import{test}from"@playwright/test";test.skip(true,"J5 implementation required");test("J5 contract",async()=>{});

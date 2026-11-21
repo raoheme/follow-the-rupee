@@ -1,0 +1,18 @@
+[
+  {
+    "id": "SYN-DEMO-VER-001",
+    "issueId": "SYN-DEMO-KND-001",
+    "completionClaimId": "SYN-DEMO-CLM-001",
+    "state": "WINDOW_OPEN",
+    "windowOpensAt": "2026-11-18T10:06:00Z",
+    "windowEndsAt": "2026-12-02T10:06:00Z",
+    "citizenVerdict": null,
+    "verdictAt": null,
+    "disputeEvidenceId": null,
+    "silenceNote": "No verdict is recorded. If the window lapses without a verdict the state becomes WINDOW_EXPIRED_NO_VERDICT, which is not verification.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

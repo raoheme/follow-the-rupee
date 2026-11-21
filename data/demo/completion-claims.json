@@ -1,0 +1,17 @@
+[
+  {
+    "id": "SYN-DEMO-CLM-001",
+    "issueId": "SYN-DEMO-KND-001",
+    "workOrderId": "SYN-DEMO-WO-001",
+    "claimedAt": "2026-11-18T10:05:00Z",
+    "claimedByPostTitle": "Assistant Engineer (Roads), K/West Ward",
+    "atrSummary": "Synthetic action-taken summary: surface break patched and joint resealed on the Paliram Road segment. Completion is claimed, not verified.",
+    "claimedAfterEvidenceId": "SYN-DEMO-EVD-001",
+    "verificationWindowEndsAt": "2026-12-02T10:06:00Z",
+    "claimNote": "A claimed completion differs from a verified completion; citizens can dispute it and silence never verifies it.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

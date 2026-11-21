@@ -1,0 +1,483 @@
+{
+ "contractors": {
+  "CT01": {
+   "name": "Sahyadri Infra Works (synthetic)",
+   "text": "Sahyadri Infra Works (fictional) handled 337 jobs worth ₹17.21M in this synthetic record, and its repairs held up well: 14% reopened within 30 days against 25% expected for its method mix, about 11 points better. It met SLA on 62% of jobs, 13 points above the benchmark for its wards (37% of jobs were in the most low-lying quartile). SLA performance is shown alongside low-lying ward exposure. The dataset does not establish causation. Average cost is 1.06× the rate card, though WO25-00611 (2.28×) and WO25-01723 (1.75×) merit a measurement-book check. Suggested improvement: confirm DLP status before billing surface repairs; 41 jobs need that review.",
+   "words": 104,
+   "evidence_ids": [
+    "WO25-00611",
+    "WO25-01723",
+    "WO25-02500"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "CT02": {
+   "name": "Konkan Roadcon Pvt Ltd (synthetic)",
+   "text": "Konkan Roadcon Pvt Ltd (fictional) completed 337 jobs worth ₹18.91M. Its 30-day reopen rate was 27% against 24% expected for its method mix, a gap of about 3 points. SLA was met on 46% of jobs, 4 points below the benchmark for its wards, with 36.5% of jobs in the most low-lying quartile. SLA performance is shown alongside low-lying ward exposure. The dataset does not establish causation. Costs average 1.06× the rate card; WO25-01502 (2.53×) and WO25-01259 (2.03×) deserve a closer look, as does WO25-02465 for linkage. One improvement: close the SLA gap by scheduling crews earlier on urgent complaints.",
+   "words": 100,
+   "evidence_ids": [
+    "WO25-01502",
+    "WO25-01259",
+    "WO25-02465"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "CT03": {
+   "name": "Mahalaxmi Civil Contractors (synthetic)",
+   "text": "Mahalaxmi Civil Contractors (fictional) completed 303 jobs worth ₹16.19M. Repairs reopened within 30 days on 38% of jobs against 25% expected for its method mix, roughly 13 points higher, and SLA was met on 39%, 11 points below the benchmark for its wards (34% of jobs were in low-lying areas). SLA performance is shown alongside low-lying ward exposure. The dataset does not establish causation. 44 jobs, worth ₹1.72M in calculated variance, were recorded more than 30% above the rate card, including WO25-01576 (3.10×) and WO25-01011 (2.24×); WO25-02498 needs a linkage check. Improvement: back large invoices with measurement-book evidence.",
+   "words": 98,
+   "evidence_ids": [
+    "WO25-01576",
+    "WO25-01011",
+    "WO25-02498"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "CT04": {
+   "name": "Western Coast Asphalt Co (synthetic)",
+   "text": "Western Coast Asphalt Co (fictional) completed 299 jobs worth ₹17.49M. About 39% of its jobs reopened within 30 days against 25% expected for its method mix, 14 points higher, and ₹6.01M of its spend is associated with those reopenings. Billing sits close to the rate card (average 1.07×), with 5 variance cases such as WO25-01005 (3.1×). SLA was met on 47% of jobs, 3 points below the benchmark for its wards (33% of jobs in low-lying areas). SLA performance is shown alongside low-lying ward exposure. The dataset does not establish causation. Improvement: review cold mix patching, the method most often reopened in its jobs.",
+   "words": 104,
+   "evidence_ids": [
+    "WO25-01005",
+    "WO25-01301",
+    "WO25-02477"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "CT05": {
+   "name": "Deccan Paving Solutions (synthetic)",
+   "text": "Deccan Paving Solutions (fictional) completed 287 jobs worth ₹14.07M and had the lowest reopen rate in this synthetic record: 9% reopened within 30 days against 24% expected for its method mix, about 15 points better. SLA was met on 60% of jobs, 10 points above the benchmark for its wards (37% of jobs in low-lying areas). SLA performance is shown alongside low-lying ward exposure. The dataset does not establish causation. Average cost is 1.04× the rate card, with 4 variance cases to check, including WO25-01942 (2.67×) and WO25-00140 (2.4×), and WO25-02456 for linkage. Improvement: document the methods behind these strong results so others can learn from them.",
+   "words": 107,
+   "evidence_ids": [
+    "WO25-01942",
+    "WO25-00140",
+    "WO25-02456"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "CT06": {
+   "name": "Shivneri Construction (synthetic)",
+   "text": "Shivneri Construction (fictional) completed 289 jobs worth ₹14.67M. Its 30-day reopen rate of 26% is close to the 24% expected for its method mix, about 2 points higher. SLA was met on 47% of jobs, 2 points below the benchmark for its wards, with 39% of jobs in low-lying areas. SLA performance is shown alongside low-lying ward exposure. The dataset does not establish causation. Costs average 1.05× the rate card; WO25-01514 (1.58×) and WO25-00743 (2.1×) merit review, and WO25-02493 needs a linkage check, one of 8 possible duplicate candidates. Improvement: tie every job to its complaint record.",
+   "words": 97,
+   "evidence_ids": [
+    "WO25-01514",
+    "WO25-00743",
+    "WO25-02493"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "CT07": {
+   "name": "Arabian Sea Engineering (synthetic)",
+   "text": "Arabian Sea Engineering (fictional) completed 328 jobs worth ₹18.64M. Its 30-day reopen rate was 32% against 25% expected for its method mix, about 8 points higher, and SLA was met on 44% of jobs, 6 points below the benchmark for its wards (34% of jobs in low-lying areas). SLA performance is shown alongside low-lying ward exposure. The dataset does not establish causation. 38 jobs, worth ₹1.97M in calculated variance, were recorded more than 30% above the rate card, including WO25-01626 (3.02×) and WO25-00197 (2.07×). Improvement: support high-value invoices with measurement-book evidence; 42 surface repairs were billed on DLP roads.",
+   "words": 99,
+   "evidence_ids": [
+    "WO25-01626",
+    "WO25-00197",
+    "WO25-02479"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "CT08": {
+   "name": "Mithi Infra Projects (synthetic)",
+   "text": "Mithi Infra Projects (fictional) completed 319 jobs worth ₹17.14M and worked in the most low-lying mix of any contractor: 42% of its jobs. Even so, 12% reopened within 30 days against 25% expected for its method mix, about 13 points better, and SLA was met on 52% of jobs, 3 points above the benchmark. SLA performance is shown alongside low-lying ward exposure. The dataset does not establish causation. 10 variance cases deserve checking, including WO25-02266 (2.89×) and WO25-01496 (2.62×). Improvement: it has the most DLP surface reviews (47), so confirm DLP status before billing.",
+   "words": 94,
+   "evidence_ids": [
+    "WO25-02266",
+    "WO25-01496",
+    "WO25-02476"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  }
+ },
+ "wards": {
+  "A": {
+   "name": "Colaba, Fort, Churchgate",
+   "text": "Ward A (Colaba, Fort, Churchgate) had a monsoon repair budget of ₹1,600,000 and recorded spend of ₹1,655,330 (104% used), ₹55,330 over budget. Most spend went to Mithi Infra Projects (₹592,238) and Excavation, pipeline repair, PQC patch (₹610,896). Spend associated with 30-day reopenings: ₹582,099 across 11 jobs. Review flags: 1 rate-card variance reviews, 1 possible duplicate candidates and 7 surface repairs billed on DLP roads (e.g. WO25-02424, WO25-00645). 1 jobs have no complaint linkage in the record; 8 complaints remain open or in progress. Next-rupee candidate: RD0004 (Shahid Bhagat Singh Marg), risk 24/100; candidate treatment for engineering review: hot mix patch. RD0002 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 126,
+   "evidence_ids": [
+    "WO25-02424",
+    "WO25-00645",
+    "RD0004",
+    "RD0002"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "B": {
+   "name": "Dongri, Masjid Bunder",
+   "text": "Ward B (Dongri, Masjid Bunder) had a monsoon repair budget of ₹4,300,000 and recorded spend of ₹3,507,952 (82% used), leaving ₹792,048. Most spend went to Konkan Roadcon Pvt Ltd (₹781,363) and Drain desilting (₹968,703). Spend associated with 30-day reopenings: ₹578,915 across 9 jobs. Review flags: 5 rate-card variance reviews, 0 possible duplicate candidates and 1 surface repairs billed on DLP roads (e.g. WO25-00611, WO25-01184). 0 jobs have no complaint linkage in the record; 12 complaints remain open or in progress. Next-rupee candidate: RD0016 (P D'Mello Road), risk 32/100; candidate treatment for engineering review: dewatering pump deployed. RD0019 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 122,
+   "evidence_ids": [
+    "WO25-00611",
+    "WO25-01184",
+    "RD0016",
+    "RD0019"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "C": {
+   "name": "Kalbadevi, Bhuleshwar, Marine Lines",
+   "text": "Ward C (Kalbadevi, Bhuleshwar, Marine Lines) had a monsoon repair budget of ₹900,000 and recorded spend of ₹796,803 (88% used), leaving ₹103,197. Most spend went to Sahyadri Infra Works (₹237,077) and Excavation, pipeline repair, PQC patch (₹381,063). Spend associated with 30-day reopenings: ₹247,660 across 8 jobs. Review flags: 2 rate-card variance reviews, 0 possible duplicate candidates and 4 surface repairs billed on DLP roads (e.g. WO25-00743, WO25-00806). 0 jobs have no complaint linkage in the record; 10 complaints remain open or in progress. Next-rupee candidate: RD0032 (Nepean Sea Road), risk 23/100; candidate treatment for engineering review: hot mix patch. RD0023 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 125,
+   "evidence_ids": [
+    "WO25-00743",
+    "WO25-00806",
+    "RD0032",
+    "RD0023"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "D": {
+   "name": "Grant Road, Malabar Hill, Tardeo",
+   "text": "Ward D (Grant Road, Malabar Hill, Tardeo) had a monsoon repair budget of ₹1,600,000 and recorded spend of ₹1,272,300 (80% used), leaving ₹327,700. Most spend went to Sahyadri Infra Works (₹393,630) and Desilting and garbage removal (₹307,528). Spend associated with 30-day reopenings: ₹235,027 across 8 jobs. Review flags: 1 rate-card variance reviews, 1 possible duplicate candidates and 7 surface repairs billed on DLP roads (e.g. WO25-00106, WO25-02500). 1 jobs have no complaint linkage in the record; 7 complaints remain open or in progress. Next-rupee candidate: RD0041 (Peddar Road), risk 24/100; candidate treatment for engineering review: hot mix patch. RD0035 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 124,
+   "evidence_ids": [
+    "WO25-00106",
+    "WO25-02500",
+    "RD0041",
+    "RD0035"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "E": {
+   "name": "Byculla, Agripada, Mumbai Central",
+   "text": "Ward E (Byculla, Agripada, Mumbai Central) has used 119% of its ₹5.3M monsoon budget, with recorded spend of ₹6.32M, which is ₹1.02M over. Western Coast Asphalt Co accounts for ₹1.21M and drain desilting for ₹1.55M. ₹2.01M of spend is associated with 30-day reopenings across 36 jobs. Flags to review: 9 rate-card variance cases such as WO25-01942, 2 possible duplicates, and 22 DLP surface repairs. The top next-rupee candidate is RD0057, Bellasis Road (risk 64, driven by accidents and nearby schools); its estimated ₹180,000 treatment is not affordable within the ward's remaining budget today. RD0052, Clare Road, is under DLP and should be reviewed first.",
+   "words": 104,
+   "evidence_ids": [
+    "WO25-01942",
+    "WO25-00913",
+    "RD0057",
+    "RD0052"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "F/S": {
+   "name": "Parel, Lalbaug, Sewri",
+   "text": "Ward F/S (Parel, Lalbaug, Sewri) has room to spare: ₹8.03M spent against ₹9.8M, 82% used, with ₹1.77M remaining. Arabian Sea Engineering (₹1.37M) and pump-and-debris removal (₹2.10M) lead the spend, and ₹1.34M is associated with 30-day reopenings across 21 jobs. Flags to review include 8 rate-card variance cases such as WO25-01358 and 11 DLP surface repairs such as WO25-02380. 55 complaints are open and 5 social posts mention ambulance urgency. RD0058, Dr Babasaheb Ambedkar Road, ranks highest for new money (risk 65, with flood exposure, repeat repairs and two emergency hospitals served); a ₹60,000 dewatering pump treatment is affordable now.",
+   "words": 99,
+   "evidence_ids": [
+    "WO25-02380",
+    "WO25-01358",
+    "RD0058",
+    "RD0048"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "F/N": {
+   "name": "Matunga, Sion, Wadala",
+   "text": "Ward F/N (Matunga, Sion, Wadala) has spent ₹9.41M of a ₹10.5M budget (90%), leaving ₹1.09M. Mithi Infra Projects (₹2.01M) and pump-and-debris work (₹2.47M) lead the spend, and ₹2.13M is associated with 30-day reopenings across 37 jobs. Please review 6 rate-card variance cases such as WO25-01011, 3 possible duplicate candidates and 20 DLP surface repairs such as WO25-00491. 53 complaints remain open. The top candidate for new money is RD0077, Eastern Express Highway (risk 78), where a dewatering pump treatment (₹60,000 estimate) fits the remaining budget. RD0076, another Eastern Express Highway segment, is under DLP, so allocation there should wait for scope review.",
+   "words": 102,
+   "evidence_ids": [
+    "WO25-00491",
+    "WO25-01011",
+    "RD0077",
+    "RD0076"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "G/S": {
+   "name": "Worli, Lower Parel, Prabhadevi",
+   "text": "Ward G/S (Worli, Lower Parel, Prabhadevi) had a monsoon repair budget of ₹3,200,000 and recorded spend of ₹2,821,986 (88% used), leaving ₹378,014. Most spend went to Sahyadri Infra Works (₹496,871) and Pump + debris removal (₹1,012,792). Spend associated with 30-day reopenings: ₹1,057,467 across 21 jobs. Review flags: 0 rate-card variance reviews, 0 possible duplicate candidates and 10 surface repairs billed on DLP roads (e.g. WO25-00410, WO25-02267). 0 jobs have no complaint linkage in the record; 28 complaints remain open or in progress. Next-rupee candidate: RD0087 (Dr Annie Besant Road), risk 40/100; candidate treatment for engineering review: hot mix patch. RD0083 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 125,
+   "evidence_ids": [
+    "WO25-00410",
+    "WO25-02267",
+    "RD0087",
+    "RD0083"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "G/N": {
+   "name": "Dadar West, Mahim, Dharavi",
+   "text": "Ward G/N (Dadar West, Mahim, Dharavi) has spent ₹6.76M of an ₹8.4M budget (80%), leaving ₹1.64M. Arabian Sea Engineering (₹1.54M) and drain desilting (₹1.53M) lead the spend, and ₹1.73M is associated with 30-day reopenings across 41 jobs. The ward stands out for traceability: 7 work orders, including WO25-02465, are possible duplicate candidates with no complaint linkage, the most of any ward. There are also 13 DLP surface repairs to review and 70 open complaints. RD0094, Senapati Bapat Marg (risk 52), is the ward's top candidate for new money (₹15,600 hot mix, affordable). RD0101, 90 Feet Road Dharavi, is under DLP: defer allocation pending scope review.",
+   "words": 105,
+   "evidence_ids": [
+    "WO25-02465",
+    "WO25-02488",
+    "RD0094",
+    "RD0101"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "H/E": {
+   "name": "Bandra East, Santacruz East, Khar East",
+   "text": "Ward H/E (Bandra East, Santacruz East, Khar East) had a monsoon repair budget of ₹8,200,000 and recorded spend of ₹6,145,533 (75% used), leaving ₹2,054,467. Most spend went to Sahyadri Infra Works (₹1,171,183) and Pump + debris removal (₹1,317,488). Spend associated with 30-day reopenings: ₹1,612,052 across 29 jobs. Review flags: 7 rate-card variance reviews, 5 possible duplicate candidates and 11 surface repairs billed on DLP roads (e.g. WO25-01576, WO25-02494). 5 jobs have no complaint linkage in the record; 46 complaints remain open or in progress. Next-rupee candidate: RD0110 (Kalanagar Road), risk 54/100; candidate treatment for engineering review: dewatering pump deployed. RD0107 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 125,
+   "evidence_ids": [
+    "WO25-01576",
+    "WO25-02494",
+    "RD0110",
+    "RD0107"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "H/W": {
+   "name": "Bandra West, Khar West, Santacruz West",
+   "text": "Ward H/W (Bandra West, Khar West, Santacruz West) had a monsoon repair budget of ₹4,300,000 and recorded spend of ₹4,245,242 (99% used), leaving ₹54,758. Most spend went to Western Coast Asphalt Co (₹813,676) and Drain desilting (₹1,151,834). Spend associated with 30-day reopenings: ₹1,391,670 across 16 jobs. Review flags: 1 rate-card variance reviews, 1 possible duplicate candidates and 3 surface repairs billed on DLP roads (e.g. WO25-02266, WO25-02475). 1 jobs have no complaint linkage in the record; 13 complaints remain open or in progress. Next-rupee candidate: RD0120 (Linking Road), risk 42/100; candidate treatment for engineering review: manhole cover replaced + grating. RD0119 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 126,
+   "evidence_ids": [
+    "WO25-02266",
+    "WO25-02475",
+    "RD0120",
+    "RD0119"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "K/E": {
+   "name": "Andheri East, Vile Parle East, Jogeshwari East",
+   "text": "Ward K/E (Andheri East, Vile Parle East, Jogeshwari East) had a monsoon repair budget of ₹9,100,000 and recorded spend of ₹8,264,048 (91% used), leaving ₹835,952. Most spend went to Konkan Roadcon Pvt Ltd (₹1,680,225) and Drain desilting (₹1,780,351). Spend associated with 30-day reopenings: ₹1,741,105 across 39 jobs. Review flags: 4 rate-card variance reviews, 2 possible duplicate candidates and 4 surface repairs billed on DLP roads (e.g. WO25-01417, WO25-00600). 2 jobs have no complaint linkage in the record; 54 complaints remain open or in progress. Next-rupee candidate: RD0136 (Western Express Highway), risk 52/100; candidate treatment for engineering review: dewatering pump deployed. RD0142 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 126,
+   "evidence_ids": [
+    "WO25-01417",
+    "WO25-00600",
+    "RD0136",
+    "RD0142"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "K/W": {
+   "name": "Andheri West, Juhu, Vile Parle West",
+   "text": "Ward K/W (Andheri West, Juhu, Vile Parle West) has used 88% of its ₹8.9M budget (₹7.85M), with ₹1.05M left. Western Coast Asphalt Co (₹1.64M) and pump-and-debris work (₹1.53M) lead the spend, and ₹1.87M is associated with 30-day reopenings across 37 jobs. 10 rate-card variance cases and 18 DLP surface repairs, such as WO25-00326, deserve review, and 48 complaints remain open. For new money, RD0148, Juhu Tara Road (risk 54), is the ward's top candidate, with waterlogging as its main issue and a ₹60,000 dewatering pump treatment that fits the remaining budget. RD0145, SV Road, is under DLP and should wait for scope review.",
+   "words": 103,
+   "evidence_ids": [
+    "WO25-00326",
+    "WO25-01369",
+    "RD0148",
+    "RD0145"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "P/S": {
+   "name": "Goregaon",
+   "text": "Ward P/S (Goregaon) had a monsoon repair budget of ₹4,800,000 and recorded spend of ₹4,349,997 (91% used), leaving ₹450,003. Most spend went to Konkan Roadcon Pvt Ltd (₹921,130) and Pump + debris removal (₹1,425,811). Spend associated with 30-day reopenings: ₹340,751 across 17 jobs. Review flags: 6 rate-card variance reviews, 1 possible duplicate candidates and 10 surface repairs billed on DLP roads (e.g. WO25-01626, WO25-01003). 1 jobs have no complaint linkage in the record; 25 complaints remain open or in progress. Next-rupee candidate: RD0169 (Link Road), risk 36/100; candidate treatment for engineering review: hot mix patch. RD0162 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 121,
+   "evidence_ids": [
+    "WO25-01626",
+    "WO25-01003",
+    "RD0169",
+    "RD0162"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "P/N": {
+   "name": "Malad",
+   "text": "Ward P/N (Malad) has used 91% of its ₹7.7M budget (₹7.01M), leaving ₹0.69M. Western Coast Asphalt Co (₹1.38M) and excavation, pipeline and PQC repairs (₹1.30M) account for the largest shares, while ₹1.82M is associated with 30-day reopenings across 35 jobs. Worth a closer look: 7 rate-card variance cases, including WO25-01005, and 16 DLP surface repairs, including WO25-02366. 69 complaints are open and 6 social posts mention ambulance urgency. RD0180, Malad Subway (risk 74), combines 6 open complaints with 5 reopened repairs; a ₹16,120 hot mix patch is within the ward's remaining budget. RD0176, SV Road, is under DLP.",
+   "words": 98,
+   "evidence_ids": [
+    "WO25-01005",
+    "WO25-02366",
+    "RD0180",
+    "RD0176"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "R/S": {
+   "name": "Kandivali",
+   "text": "Ward R/S (Kandivali) had a monsoon repair budget of ₹6,600,000 and recorded spend of ₹6,642,234 (101% used), ₹42,234 over budget. Most spend went to Western Coast Asphalt Co (₹1,188,375) and Excavation, pipeline repair, PQC patch (₹1,785,079). Spend associated with 30-day reopenings: ₹1,020,154 across 25 jobs. Review flags: 8 rate-card variance reviews, 0 possible duplicate candidates and 5 surface repairs billed on DLP roads (e.g. WO25-00197, WO25-01301). 0 jobs have no complaint linkage in the record; 41 complaints remain open or in progress. Next-rupee candidate: RD0189 (SV Road), risk 36/100; candidate treatment for engineering review: hot mix patch. RD0193 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 123,
+   "evidence_ids": [
+    "WO25-00197",
+    "WO25-01301",
+    "RD0189",
+    "RD0193"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "R/C": {
+   "name": "Borivali",
+   "text": "Ward R/C (Borivali) has a small monsoon budget of ₹2.9M. Recorded spend is ₹3.31M, 114% used and ₹0.41M over. Mithi Infra Projects (₹0.79M) and manhole cover work (₹0.63M) lead the spend, and ₹0.54M is associated with 30-day reopenings across 12 jobs. No rate-card variance cases appear, but 19 DLP surface repairs, such as WO25-01158, and 2 possible duplicate candidates need review, and 34 complaints are open. RD0204, Western Express Highway (risk 44), is the top new-money candidate; its ₹11,180 hot mix estimate is not affordable within the ward's remaining budget.",
+   "words": 90,
+   "evidence_ids": [
+    "WO25-01158",
+    "WO25-00691",
+    "RD0204",
+    "RD0197"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "R/N": {
+   "name": "Dahisar",
+   "text": "Ward R/N (Dahisar) had a monsoon repair budget of ₹4,800,000 and recorded spend of ₹3,533,838 (74% used), leaving ₹1,266,162. Most spend went to Shivneri Construction (₹972,620) and Drain desilting (₹813,290). Spend associated with 30-day reopenings: ₹1,160,682 across 22 jobs. Review flags: 0 rate-card variance reviews, 1 possible duplicate candidates and 18 surface repairs billed on DLP roads (e.g. WO25-02144, WO25-02483). 1 jobs have no complaint linkage in the record; 17 complaints remain open or in progress. Next-rupee candidate: RD0213 (Western Express Highway), risk 58/100; candidate treatment for engineering review: hot mix patch. RD0211 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 118,
+   "evidence_ids": [
+    "WO25-02144",
+    "WO25-02483",
+    "RD0213",
+    "RD0211"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "L": {
+   "name": "Kurla",
+   "text": "Kurla (ward L) has the largest rupee overspend in this synthetic record: ₹13.04M recorded against an ₹11.9M monsoon budget, about 110% used and ₹1.14M over. Sahyadri Infra Works took the largest share (₹2.16M), and pump and debris removal was the biggest method (₹2.75M). ₹1.82M of spend is associated with 30-day reopenings across 41 jobs. Review flags include 8 rate-card variance cases, 4 possible duplicates and 18 DLP surface repairs, such as WO25-02068. 81 complaints are still open and 7 social posts mention ambulances. RD0220, Kurla Andheri Road, carries the highest risk score in the city (82) and is under DLP, so new allocation should wait for a DLP scope review.",
+   "words": 110,
+   "evidence_ids": [
+    "WO25-02068",
+    "WO25-01306",
+    "RD0222",
+    "RD0220"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "M/E": {
+   "name": "Govandi, Mankhurd, Deonar",
+   "text": "Ward M/E (Govandi, Mankhurd, Deonar) had a monsoon repair budget of ₹9,100,000 and recorded spend of ₹7,235,685 (80% used), leaving ₹1,864,315. Most spend went to Mithi Infra Projects (₹1,336,145) and Excavation, pipeline repair, PQC patch (₹1,273,823). Spend associated with 30-day reopenings: ₹1,427,808 across 39 jobs. Review flags: 6 rate-card variance reviews, 2 possible duplicate candidates and 18 surface repairs billed on DLP roads (e.g. WO25-01065, WO25-01782). 2 jobs have no complaint linkage in the record; 41 complaints remain open or in progress. Next-rupee candidate: RD0231 (Ghatkopar Mankhurd Link Road), risk 56/100; candidate treatment for engineering review: hot mix patch. RD0235 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 125,
+   "evidence_ids": [
+    "WO25-01065",
+    "WO25-01782",
+    "RD0231",
+    "RD0235"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "M/W": {
+   "name": "Chembur",
+   "text": "Ward M/W (Chembur) had a monsoon repair budget of ₹4,400,000 and recorded spend of ₹4,689,823 (107% used), ₹289,823 over budget. Most spend went to Konkan Roadcon Pvt Ltd (₹934,872) and Desilting and garbage removal (₹1,060,141). Spend associated with 30-day reopenings: ₹1,150,699 across 24 jobs. Review flags: 4 rate-card variance reviews, 0 possible duplicate candidates and 14 surface repairs billed on DLP roads (e.g. WO25-02034, WO25-01994). 0 jobs have no complaint linkage in the record; 32 complaints remain open or in progress. Next-rupee candidate: RD0248 (Eastern Express Highway), risk 50/100; candidate treatment for engineering review: hot mix patch. RD0243 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 123,
+   "evidence_ids": [
+    "WO25-02034",
+    "WO25-01994",
+    "RD0248",
+    "RD0243"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "N": {
+   "name": "Ghatkopar, Vikhroli",
+   "text": "Ward N (Ghatkopar, Vikhroli) had a monsoon repair budget of ₹6,200,000 and recorded spend of ₹5,999,557 (97% used), leaving ₹200,443. Most spend went to Arabian Sea Engineering (₹1,643,624) and Excavation, pipeline repair, PQC patch (₹1,492,730). Spend associated with 30-day reopenings: ₹970,747 across 22 jobs. Review flags: 6 rate-card variance reviews, 3 possible duplicate candidates and 9 surface repairs billed on DLP roads (e.g. WO25-02499, WO25-00287). 3 jobs have no complaint linkage in the record; 38 complaints remain open or in progress. Next-rupee candidate: RD0251 (LBS Marg), risk 47/100; candidate treatment for engineering review: dewatering pump deployed. RD0259 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 122,
+   "evidence_ids": [
+    "WO25-02499",
+    "WO25-00287",
+    "RD0251",
+    "RD0259"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "S": {
+   "name": "Bhandup, Powai, Kanjurmarg",
+   "text": "Ward S (Bhandup, Powai, Kanjurmarg) had a monsoon repair budget of ₹9,500,000 and recorded spend of ₹7,489,270 (79% used), leaving ₹2,010,730. Most spend went to Sahyadri Infra Works (₹1,321,811) and Excavation, pipeline repair, PQC patch (₹2,040,481). Spend associated with 30-day reopenings: ₹2,219,613 across 40 jobs. Review flags: 6 rate-card variance reviews, 3 possible duplicate candidates and 8 surface repairs billed on DLP roads (e.g. WO25-01723, WO25-02462). 3 jobs have no complaint linkage in the record; 41 complaints remain open or in progress. Next-rupee candidate: RD0273 (Powai Adi Shankaracharya Marg), risk 58/100; candidate treatment for engineering review: dewatering pump deployed. RD0271 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 125,
+   "evidence_ids": [
+    "WO25-01723",
+    "WO25-02462",
+    "RD0273",
+    "RD0271"
+   ],
+   "narrative_author": "deterministic_summary"
+  },
+  "T": {
+   "name": "Mulund",
+   "text": "Ward T (Mulund) had a monsoon repair budget of ₹5,100,000 and recorded spend of ₹3,953,564 (78% used), leaving ₹1,146,436. Most spend went to Arabian Sea Engineering (₹891,396) and Drain desilting (₹971,220). Spend associated with 30-day reopenings: ₹1,677,820 across 21 jobs. Review flags: 6 rate-card variance reviews, 0 possible duplicate candidates and 8 surface repairs billed on DLP roads (e.g. WO25-01496, WO25-01510). 0 jobs have no complaint linkage in the record; 35 complaints remain open or in progress. Next-rupee candidate: RD0291 (Devidayal Road), risk 42/100; candidate treatment for engineering review: dewatering pump deployed. RD0280 is under DLP: new allocation deferred pending DLP scope review. Figures come from a synthetic record and are indicators for review, not findings of wrongdoing.",
+   "words": 118,
+   "evidence_ids": [
+    "WO25-01496",
+    "WO25-01510",
+    "RD0291",
+    "RD0280"
+   ],
+   "narrative_author": "deterministic_summary"
+  }
+ },
+ "cases": {
+  "WO25-00611": {
+   "name": "rate_card_variance_wo",
+   "text": "WO25-00611 is a road cave-in repair in ward B by Sahyadri Infra Works (fictional): excavation, pipeline repair and a PQC patch over 27.5 sqm, recorded at ₹410,330 against a rate-card expectation of ₹180,000. That is 2.28 times the expectation, or ₹230,330 above it, which puts it in the very-high variance review band. Two complaints are linked to it, so the work looks traceable; the question for the measurement book is why the recorded amount sits so far above the standard rate. This is a prompt for review, not a finding of wrongdoing.",
+   "words": 92,
+   "evidence_ids": [
+    "WO25-00611"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "WO25-02486": {
+   "name": "duplicate_candidate_wo",
+   "text": "WO25-02486 raises a possible duplicate-billing question. It is a pump and debris removal job on RD0216 in ward L, recorded at ₹112,441 with no complaint linked, and it matches an earlier job on the same road, WO25-01255, in method and in area (2.8 sqm), three days earlier and with the same contractor. The costs differ by only about 0.55%. Neither the amount nor the method is unusual on its own; the pairing with no linked complaint is what makes it worth a site-evidence and linkage check. A duplicate candidate means please verify, not confirmed.",
+   "words": 94,
+   "evidence_ids": [
+    "WO25-02486"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "WO25-01723": {
+   "name": "surface_dlp_wo",
+   "text": "WO25-01723 is a road cave-in repair on RD0271 in ward S, recorded at ₹315,328 for excavation, pipeline repair and a PQC patch (30.3 sqm). The road was resurfaced on 2023-02-28 and is marked as still under its defect liability period, so a surface repair billed to the municipality may be something the original contractor should cover. That needs a contract and scope check, because DLP status alone does not prove liability. Separately, the amount is 1.75 times the rate-card expectation of ₹180,000.",
+   "words": 82,
+   "evidence_ids": [
+    "WO25-01723"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "BMC25-004589": {
+   "name": "unfixed_multilingual_complaint_near_hospital_corridor",
+   "text": "A Hindi complaint, BMC25-004589, logged on the MyBMC app in mid-August 2025, says that flooding at Vikhroli (ward N) is stopping an ambulance from getting through. Its GPS pin lies about 3 metres from RD0251, an ambulance-entry road for an emergency hospital, and 24 people upvoted it, yet it is still open with no work order linked. Its category is marked unverified because the Hindi wording is generic, but the ambulance reference makes it a good first case for a ward officer to check.",
+   "words": 84,
+   "evidence_ids": [
+    "BMC25-004589"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  }
+ },
+ "roads": {
+  "RD0077": {
+   "name": "Eastern Express Highway",
+   "text": "RD0077, the Eastern Express Highway segment in ward F/N, tops the new-budget list with a risk score of 78. It has 6 open complaints nearby and 6 reopened repairs on record, and sits close to a flood hotspot. Most of its history points to waterlogging (2 open complaints and 4 reopened jobs), so the candidate treatment for engineering review is a dewatering pump deployment, estimated at ₹60,000 and affordable from the ward's remaining ₹1.09M. It appears in the top ten under all four weighting profiles we tested.",
+   "words": 87,
+   "evidence_ids": [
+    "RD0077"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "RD0180": {
+   "name": "Malad Subway",
+   "text": "RD0180, Malad Subway in ward P/N, ranks second (risk 74). Nine open complaints sit near it and 8 repairs have reopened within 30 days, and the road also touches a flood hotspot and a school. The dominant issue is potholes (6 open complaints plus 5 reopened jobs), so the candidate treatment for engineering review is a hot mix patch, about ₹16,120 and affordable within the ward's remaining ₹0.69M. It stays in the top ten under all four weighting profiles.",
+   "words": 79,
+   "evidence_ids": [
+    "RD0180"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "RD0173": {
+   "name": "Marve Road",
+   "text": "RD0173, Marve Road in ward P/N, ranks third (risk 67). Five open complaints and five reopened repairs point to potholes, and 6 accidents with road-surface causes are on record. The candidate treatment for engineering review is a hot mix patch, estimated at ₹17,420, which the ward's budget can cover. It is in the top ten under three of the four weighting profiles, so treat it as a strong but not unanimous pick.",
+   "words": 72,
+   "evidence_ids": [
+    "RD0173"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "RD0058": {
+   "name": "Dr Babasaheb Ambedkar Road",
+   "text": "RD0058, Dr Babasaheb Ambedkar Road in ward F/S, ranks fourth (risk 65). It combines 5 reopened repairs with two flood hotspots nearby and serves two emergency hospitals, which is why the score is high despite only one open complaint on record. The candidate treatment for engineering review is a dewatering pump deployment, about ₹60,000, affordable from the ward's ₹1.77M remaining.",
+   "words": 60,
+   "evidence_ids": [
+    "RD0058"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  },
+  "RD0057": {
+   "name": "Bellasis Road",
+   "text": "RD0057, Bellasis Road in ward E, ranks fifth (risk 64), driven mainly by accident severity and four nearby schools. Three open complaints describe a cave-in, so the candidate treatment for engineering review is an excavation, pipeline repair and PQC patch, estimated at ₹180,000. Ward E is already ₹1.02M over its monsoon budget, so this is not affordable now; risk ranking is deliberately kept separate from affordability, which is why the road stays on the list.",
+   "words": 75,
+   "evidence_ids": [
+    "RD0057"
+   ],
+   "narrative_author": "claude_sonnet_5_5_offline_reviewed"
+  }
+ },
+ "_verification": {
+  "errors": [],
+  "authored_counts": {
+   "contractors": 8,
+   "wards": 8,
+   "cases": 4,
+   "roads": 5
+  },
+  "contractor_word_range": [
+   94,
+   107
+  ],
+  "method": "Showcase narratives authored by Claude Sonnet 5.5 offline from verified pipeline numbers (every number is checked against computed values); remaining wards use deterministic summaries.",
+  "disclosure": "Synthetic challenge dataset. Not official BMC data. Contractors, amounts, dates, coordinates and transactions are fictional. Real Mumbai geographic names are used only for challenge realism.",
+  "model_contribution_disclosure": "Claude was used during development for multilingual interpretation and reviewed plain-language explanations grounded in deterministic PostGIS calculations. All monetary calculations, audit rules and rankings are deterministic and reproducible. The live demo works offline."
+ }
+}

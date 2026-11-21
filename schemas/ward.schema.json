@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "ward",
+  "description": "Synthetic ward context. The boundary is an illustrative box, not an official boundary.",
+  "required": [
+    "id",
+    "recordNature",
+    "sourceTier",
+    "recordVersion",
+    "updatedAt",
+    "code",
+    "displayName",
+    "localityLabel",
+    "role",
+    "electedOversightNote",
+    "boundary",
+    "boundaryNature",
+    "boundaryNote"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "recordNature": {
+      "const": "SYNTHETIC_DEMONSTRATION"
+    },
+    "sourceTier": {
+      "enum": [
+        "SYNTHETIC_DEMO",
+        "COMMUNITY_REFERENCE",
+        "OFFICIAL_SOURCE_PENDING"
+      ]
+    },
+    "recordVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z](/[A-Z])?$"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "localityLabel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "role": {
+      "enum": [
+        "PRIMARY_DEMONSTRATION",
+        "SCALE_PREVIEW"
+      ]
+    },
+    "electedOversightNote": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "properties": {
+        "type": {
+          "const": "Polygon"
+        },
+        "coordinates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "number",
+                  "minimum": 72.77,
+                  "maximum": 72.99
+                },
+                {
+                  "type": "number",
+                  "minimum": 18.89,
+                  "maximum": 19.275
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
+        }
+      }
+    },
+    "boundaryNature": {
+      "const": "SYNTHETIC_ILLUSTRATIVE_BOX"
+    },
+    "boundaryNote": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    }
+  }
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "SYN-DEMO-TND-001",
+    "budgetId": "SYN-DEMO-BUD-001",
+    "tenderReference": "SYN-DEMO-TNR-2026-KW-001",
+    "title": "Synthetic CC-road rehabilitation tender, Paliram Road segment",
+    "status": "CONTRACT_AWARDED",
+    "publishedOn": "2025-06-10",
+    "estimatedValuePaise": 190000000,
+    "scopeSummary": "Synthetic concrete-road rehabilitation including joint repair on one carriageway segment.",
+    "locationDescription": "Paliram Road segment near S.V. Road Junction (synthetic label).",
+    "streetGeometryAvailable": true,
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-TND-002",
+    "budgetId": "SYN-DEMO-BUD-002",
+    "tenderReference": "SYN-DEMO-TNR-2026-KW-002",
+    "title": "Synthetic junction and corridor improvement tender",
+    "status": "TENDER_PUBLISHED",
+    "publishedOn": "2026-08-12",
+    "estimatedValuePaise": 120000000,
+    "scopeSummary": "Synthetic junction improvement works described at locality level only.",
+    "locationDescription": "Along the JP Road Metro Corridor service lane (locality description only; no street-level geometry in the synthetic source record).",
+    "streetGeometryAvailable": false,
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "config_version": "h1v.1",
+  "methodology_status": "VALIDATED_SENSITIVITY_CHECKED",
+  "description": "Versioned Next-Rupee road risk model. Risk is computed from road-level evidence only; ward affordability, DLP status, social likes/forwards and engineer remarks never enter the risk score.",
+  "recommended_profile": "A_balanced",
+  "recommendation_reasoning": "A_balanced keeps every factor visible and weights the two evidence-of-failure factors (open complaints, reopened repairs) equally with the two harm factors, so no single data source can dominate; the other three profiles are used only to prove stability.",
+  "weights": {"C": 0.20, "R": 0.20, "F": 0.15, "A": 0.15, "V": 0.15, "T": 0.10, "D": 0.05},
+  "profiles": {
+    "A_balanced": {"C": 0.20, "R": 0.20, "F": 0.15, "A": 0.15, "V": 0.15, "T": 0.10, "D": 0.05},
+    "B_backlog_durability": {"C": 0.30, "R": 0.30, "F": 0.10, "A": 0.10, "V": 0.10, "T": 0.05, "D": 0.05},
+    "C_safety_facility": {"C": 0.10, "R": 0.10, "F": 0.10, "A": 0.30, "V": 0.30, "T": 0.05, "D": 0.05},
+    "D_flood_traffic": {"C": 0.10, "R": 0.10, "F": 0.30, "A": 0.15, "V": 0.10, "T": 0.20, "D": 0.05}
+  },
+  "factor_names": {"C": "Unresolved complaint burden", "R": "Reopened repair burden", "F": "Flood-hotspot exposure", "A": "Accident severity", "V": "Vulnerable-facility access", "T": "Traffic and two-wheeler exposure", "D": "Durability opportunity"},
+  "factor_definitions": {
+    "C": "Open + In Progress complaints whose source GPS falls within complaint_radius_m of the road segment (nearest segment only). Observed only if at least one complaint of any status is within range.",
+    "R": "Count of work orders on the road recorded as reopened within 30 days. Observed only if the road has at least one work order.",
+    "F": "Sum over flood hotspots within hotspot_radius_m of years_flagged_last_5 x (1 - distance/radius). Always observed.",
+    "A": "Severity-weighted accidents (Fatal 5, Grievous 3, Minor 1) with a road-surface probable cause on the road_id. Always observed.",
+    "V": "Facilities whose ambulance_entry_road is the road: emergency hospital base + beds, school base + students (capped). Always observed.",
+    "T": "Weighted blend of winsorised peak-hour vehicles, congestion index, bus routes and two-wheeler share. Observed if a traffic row exists.",
+    "D": "Mean 30-day reopen-rate gap between the surface methods used on the road and the best surface method. Observed only if the road has surface work orders."
+  },
+  "normalization": {"method": "winsorised_minmax", "winsor_percentile": 95},
+  "missing_value_rule": "Missing factors are not zero-filled: risk = sum(w_f x norm_f) / sum(w_f) over observed factors; evidence_coverage_pct = 100 x sum(observed weights).",
+  "coverage_min_pct": 70,
+  "top_rank_gate": 3,
+  "insufficient_tag": "INSUFFICIENT_EVIDENCE_FOR_TOP_RANK",
+  "tie_breaking": "risk_score descending, then road_id ascending",
+  "complaint_radius_m": 250,
+  "hotspot_radius_m": 600,
+  "accident_causes": ["Pothole", "Waterlogged road", "Uneven road / open chamber"],
+  "accident_severity_weights": {"Fatal": 5, "Grievous": 3, "Minor": 1},
+  "facility": {"hospital_base": 10, "per_100_beds": 1, "hospital_bed_cap_units": 15, "school_base": 2, "per_500_students": 1, "school_student_cap_units": 4},
+  "traffic_weights": {"peak_hour_vehicles": 0.4, "congestion_index_0_10": 0.2, "bus_routes_count": 0.2, "two_wheeler_share_pct": 0.2},
+  "lanes": {"under_dlp_Y": "DLP_REVIEW_FIRST_LANE", "under_dlp_N": "NEW_BUDGET_CANDIDATE_LANE"},
+  "affordable_now_rule": "Independent of risk rank: ward monsoon budget minus recorded ward spend >= candidate treatment estimate (rate card x assumed area). Evaluated only in NEW_BUDGET_CANDIDATE_LANE.",
+  "dlp_lane": {
+    "allocation_action": "DEFER_PENDING_DLP_SCOPE_REVIEW",
+    "allocation_note": "New municipal repair allocation: defer pending DLP scope review.",
+    "potential_spend_label": "Potential new spend avoided if contractual coverage is confirmed",
+    "caveat": "DLP status is temporal/contextual evidence and does not prove contractual applicability or liability."
+  },
+  "candidate_treatment_label": "Candidate treatment for engineering review",
+  "fallback_treatment": "Engineering review required",
+  "exclude_cold_mix_when": {"road_types": ["Highway", "Arterial"], "flood_factor_gt": 0, "risk_score_gte": 50},
+  "default_patch_sqm_if_unknown": 6.6,
+  "stability_top_n": 10
+}

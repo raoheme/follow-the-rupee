@@ -1,0 +1,110 @@
+[
+  {
+    "id": "SYN-DEMO-AST-ROAD-001",
+    "assetType": "ROAD_SEGMENT",
+    "displayName": "Paliram Road carriageway segment (synthetic)",
+    "streetName": "Paliram Road",
+    "corridorName": "JP Road Metro Corridor (context label)",
+    "nearbyLandmark": "near S.V. Road Junction (synthetic label)",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.8305,
+          19.119
+        ],
+        [
+          72.833,
+          19.1205
+        ]
+      ]
+    },
+    "wardCandidateId": "SYN-DEMO-WARD-KW",
+    "responsibleDepartmentId": "SYN-DEMO-DEPT-ROADS",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-AST-DRAIN-001",
+    "assetType": "DRAIN_SEGMENT",
+    "displayName": "JP Road service-lane drain segment (synthetic)",
+    "streetName": "JP Road service lane",
+    "corridorName": "JP Road Metro Corridor (context label)",
+    "nearbyLandmark": "near JP Road Metro Corridor pillar cluster (synthetic label)",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.832,
+          19.121
+        ],
+        [
+          72.835,
+          19.122
+        ]
+      ]
+    },
+    "wardCandidateId": "SYN-DEMO-WARD-KW",
+    "responsibleDepartmentId": "SYN-DEMO-DEPT-SWD",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-AST-ROAD-002",
+    "assetType": "ROAD_SEGMENT",
+    "displayName": "Dharavi-label road segment (synthetic scale preview)",
+    "streetName": "Synthetic preview road, Dharavi locality label",
+    "corridorName": null,
+    "nearbyLandmark": "near a synthetic Dharavi locality marker",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.8535,
+          19.0425
+        ],
+        [
+          72.8555,
+          19.044
+        ]
+      ]
+    },
+    "wardCandidateId": "SYN-DEMO-WARD-GN",
+    "responsibleDepartmentId": "SYN-DEMO-DEPT-ROADS",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-AST-DRAIN-002",
+    "assetType": "DRAIN_SEGMENT",
+    "displayName": "Govandi-label drain segment (synthetic scale preview)",
+    "streetName": "Synthetic preview drain, Govandi locality label",
+    "corridorName": null,
+    "nearbyLandmark": "near a synthetic Shivaji Nagar locality marker",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.9235,
+          19.0525
+        ],
+        [
+          72.9255,
+          19.054
+        ]
+      ]
+    },
+    "wardCandidateId": "SYN-DEMO-WARD-ME",
+    "responsibleDepartmentId": "SYN-DEMO-DEPT-SWD",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

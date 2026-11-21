@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "tender",
+  "required": [
+    "id",
+    "recordNature",
+    "sourceTier",
+    "recordVersion",
+    "updatedAt",
+    "budgetId",
+    "tenderReference",
+    "title",
+    "status",
+    "publishedOn",
+    "estimatedValuePaise",
+    "scopeSummary",
+    "locationDescription",
+    "streetGeometryAvailable"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "recordNature": {
+      "const": "SYNTHETIC_DEMONSTRATION"
+    },
+    "sourceTier": {
+      "enum": [
+        "SYNTHETIC_DEMO",
+        "COMMUNITY_REFERENCE",
+        "OFFICIAL_SOURCE_PENDING"
+      ]
+    },
+    "recordVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "budgetId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "tenderReference": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-TNR-[A-Z0-9-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "status": {
+      "enum": [
+        "TENDER_PUBLISHED",
+        "CONTRACT_AWARDED",
+        "RETENDER_REQUIRED"
+      ]
+    },
+    "publishedOn": {
+      "type": "string",
+      "format": "date"
+    },
+    "estimatedValuePaise": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "scopeSummary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "locationDescription": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "streetGeometryAvailable": {
+      "type": "boolean"
+    }
+  }
+}

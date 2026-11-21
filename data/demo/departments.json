@@ -1,0 +1,75 @@
+[
+  {
+    "id": "SYN-DEMO-DEPT-ROADS",
+    "kind": "CENTRAL_DEPARTMENT",
+    "displayName": "Roads Department",
+    "wardId": null,
+    "postTitles": [
+      "Executive Engineer (Roads)",
+      "Deputy Chief Engineer (Roads)"
+    ],
+    "scopeSummary": "Synthetic carriageway rehabilitation and pothole response; accountability is institutional, by post title.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-DEPT-SWD",
+    "kind": "CENTRAL_DEPARTMENT",
+    "displayName": "Storm Water Drains Department",
+    "wardId": null,
+    "postTitles": [
+      "Executive Engineer (Storm Water Drains)"
+    ],
+    "scopeSummary": "Synthetic drain desilting and waterlogging response; accountability is institutional, by post title.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-DEPT-WARD-KW",
+    "kind": "WARD_OFFICE",
+    "displayName": "K/West Ward Office",
+    "wardId": "SYN-DEMO-WARD-KW",
+    "postTitles": [
+      "Assistant Engineer (Roads), K/West Ward",
+      "Assistant Engineer (Storm Water Drains), K/West Ward",
+      "Assistant Municipal Commissioner (Ward Officer), K/West Ward"
+    ],
+    "scopeSummary": "Synthetic ward-level execution posts for the primary demonstration ward.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-DEPT-WARD-GN",
+    "kind": "WARD_OFFICE",
+    "displayName": "G/North Ward Office",
+    "wardId": "SYN-DEMO-WARD-GN",
+    "postTitles": [
+      "Assistant Engineer (Roads), G/North Ward"
+    ],
+    "scopeSummary": "Synthetic scale-preview ward post.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-DEPT-WARD-ME",
+    "kind": "WARD_OFFICE",
+    "displayName": "M/East Ward Office",
+    "wardId": "SYN-DEMO-WARD-ME",
+    "postTitles": [
+      "Assistant Engineer (Storm Water Drains), M/East Ward"
+    ],
+    "scopeSummary": "Synthetic scale-preview ward post.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "SYN-DEMO-DLP-001",
+    "workOrderId": "SYN-DEMO-WO-001",
+    "dlpStartsOn": "2026-04-01",
+    "explanation": "The synthetic work order is inside its defect liability period until 31 March 2027. A defect on this segment may fall under a contractual rectification obligation.",
+    "warrantyPathNote": "Check the contractual warranty path before proposing fresh expenditure. Financial responsibility is pending contractual verification.",
+    "syntheticFreshRepairEstimatePaise": 1200000,
+    "potentialSpendLabel": "SYNTHETIC_POTENTIAL_NOT_REALIZED_SAVINGS",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]

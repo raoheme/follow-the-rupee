@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "dlp-status",
+  "required": [
+    "id",
+    "recordNature",
+    "sourceTier",
+    "recordVersion",
+    "updatedAt",
+    "workOrderId",
+    "dlpStartsOn",
+    "explanation",
+    "warrantyPathNote",
+    "syntheticFreshRepairEstimatePaise",
+    "potentialSpendLabel"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "recordNature": {
+      "const": "SYNTHETIC_DEMONSTRATION"
+    },
+    "sourceTier": {
+      "enum": [
+        "SYNTHETIC_DEMO",
+        "COMMUNITY_REFERENCE",
+        "OFFICIAL_SOURCE_PENDING"
+      ]
+    },
+    "recordVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "workOrderId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "dlpStartsOn": {
+      "type": "string",
+      "format": "date"
+    },
+    "explanation": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "warrantyPathNote": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "syntheticFreshRepairEstimatePaise": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "potentialSpendLabel": {
+      "enum": [
+        "SYNTHETIC_POTENTIAL_NOT_REALIZED_SAVINGS",
+        null
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "syntheticFreshRepairEstimatePaise": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "syntheticFreshRepairEstimatePaise"
+        ]
+      },
+      "then": {
+        "properties": {
+          "potentialSpendLabel": {
+            "const": "SYNTHETIC_POTENTIAL_NOT_REALIZED_SAVINGS"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "potentialSpendLabel": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

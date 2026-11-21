@@ -1,0 +1,3132 @@
+openapi: 3.1.0
+info:
+  title: Mumbai Civic Lens API
+  version: 1.2.3
+  description: Synthetic demonstration API. All operational records are SYNTHETIC_DEMONSTRATION data. This is not an official BMC service. Money
+    is integer paise; timestamps are UTC ISO-8601 date-times; calendar dates are YYYY-MM-DD; GeoJSON is [longitude, latitude]. recordVersion is
+    the single optimistic-concurrency authority (ETag is derived from it; stale writes return 409). The X-Demo-Persona header is a simulated demonstration
+    persona, not authentication or authorization. Completion claimed is not completion verified, and silence never verifies closure.
+servers:
+- url: http://localhost:8080
+security:
+- DemoPersona: []
+components:
+  securitySchemes:
+    DemoPersona:
+      type: apiKey
+      in: header
+      name: X-Demo-Persona
+      description: Simulated demonstration persona, not authentication or authorization.
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+    EntityId:
+      name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+    Bbox:
+      name: bbox
+      in: query
+      required: true
+      description: minLon,minLat,maxLon,maxLat in WGS 84 (longitude first).
+      schema:
+        type: string
+        pattern: ^-?[0-9]+(\.[0-9]+)?,-?[0-9]+(\.[0-9]+)?,-?[0-9]+(\.[0-9]+)?,-?[0-9]+(\.[0-9]+)?$
+    Ward:
+      name: ward
+      in: query
+      schema:
+        type: string
+        pattern: ^[A-Z](/[A-Z])?$
+    Category:
+      name: category
+      in: query
+      schema:
+        enum:
+        - POTHOLE
+        - DRAIN_BLOCKAGE
+        - WATERLOGGING
+        - FACILITY_REPAIR
+    Status:
+      name: status
+      in: query
+      schema:
+        enum:
+        - DRAFT_LOCAL
+        - SUBMITTED_UNVERIFIED
+        - TRIAGED_ASSIGNED
+        - IN_PROGRESS
+        - CLOSURE_CLAIMED_PENDING_VERIFICATION
+        - VERIFIED_COMPLETE
+        - DISPUTED_REOPENED
+    DlpOnly:
+      name: dlpOnly
+      in: query
+      schema:
+        type: boolean
+    CorrelationId:
+      name: X-Correlation-Id
+      in: header
+      required: true
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 128
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 128
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: Compatibility header. It must equal the quoted recordVersion of the target record, for example "3"; recordVersion in the command
+        body is the single concurrency authority and a stale value returns 409 Conflict.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+  schemas:
+    Position:
+      type: array
+      prefixItems:
+      - type: number
+        minimum: 72.77
+        maximum: 72.99
+      - type: number
+        minimum: 18.89
+        maximum: 19.275
+      items: false
+      minItems: 2
+      maxItems: 2
+    GeometryPoint:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          const: Point
+        coordinates:
+          $ref: '#/components/schemas/Position'
+    GeometryLineString:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          const: LineString
+        coordinates:
+          type: array
+          minItems: 2
+          items:
+            $ref: '#/components/schemas/Position'
+    GeometryPolygon:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - coordinates
+      properties:
+        type:
+          const: Polygon
+        coordinates:
+          type: array
+          minItems: 1
+          items:
+            type: array
+            minItems: 4
+            items:
+              $ref: '#/components/schemas/Position'
+    Geometry:
+      oneOf:
+      - $ref: '#/components/schemas/GeometryPoint'
+      - $ref: '#/components/schemas/GeometryLineString'
+      - $ref: '#/components/schemas/GeometryPolygon'
+      description: GeoJSON geometry in [longitude, latitude] order, WGS 84 (SRID 4326), inside the Greater Mumbai bounds.
+    Ward:
+      type: object
+      additionalProperties: false
+      description: Synthetic ward context. The boundary is an illustrative box, not an official boundary.
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - code
+      - displayName
+      - localityLabel
+      - role
+      - electedOversightNote
+      - boundary
+      - boundaryNature
+      - boundaryNote
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        code:
+          type: string
+          pattern: ^[A-Z](/[A-Z])?$
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 120
+        localityLabel:
+          type: string
+          minLength: 1
+          maxLength: 160
+        role:
+          enum:
+          - PRIMARY_DEMONSTRATION
+          - SCALE_PREVIEW
+        electedOversightNote:
+          type: string
+          minLength: 1
+          maxLength: 400
+        boundary:
+          $ref: '#/components/schemas/GeometryPolygon'
+        boundaryNature:
+          const: SYNTHETIC_ILLUSTRATIVE_BOX
+        boundaryNote:
+          type: string
+          minLength: 1
+          maxLength: 300
+    Department:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - kind
+      - displayName
+      - wardId
+      - postTitles
+      - scopeSummary
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        kind:
+          enum:
+          - CENTRAL_DEPARTMENT
+          - WARD_OFFICE
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 120
+        wardId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        postTitles:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 160
+          minItems: 1
+        scopeSummary:
+          type: string
+          minLength: 1
+          maxLength: 300
+    CivicAsset:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - assetType
+      - displayName
+      - streetName
+      - corridorName
+      - nearbyLandmark
+      - geometry
+      - wardCandidateId
+      - responsibleDepartmentId
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        assetType:
+          enum:
+          - ROAD_SEGMENT
+          - DRAIN_SEGMENT
+          - SCHOOL
+          - DISPENSARY
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 160
+        streetName:
+          type: string
+          minLength: 1
+          maxLength: 120
+        corridorName:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          maxLength: 120
+        nearbyLandmark:
+          type: string
+          minLength: 1
+          maxLength: 160
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        wardCandidateId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        responsibleDepartmentId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+    Jurisdiction:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - issueId
+      - status
+      - spatialMatchMethod
+      - distanceToBoundaryMeters
+      - candidateWardId
+      - externalAgencyLabel
+      - confirmationBasis
+      - sourceConflictNote
+      - legalOwnershipAsserted
+      - confidenceNote
+      - establishedAt
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        issueId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        status:
+          enum:
+          - UNKNOWN
+          - SPATIALLY_INFERRED_PROVISIONAL
+          - CONFIRMED_BMC_WARD
+          - EXTERNAL_AGENCY_ASSIGNED
+          - CONFLICT_DISPUTED
+          - HANDOFF_LOGGED
+        spatialMatchMethod:
+          enum:
+          - ST_COVERS
+          - ST_INTERSECTS
+          - NONE
+        distanceToBoundaryMeters:
+          type:
+          - number
+          - 'null'
+          minimum: 0
+        candidateWardId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        externalAgencyLabel:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          maxLength: 160
+        confirmationBasis:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          maxLength: 300
+        sourceConflictNote:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          maxLength: 400
+        legalOwnershipAsserted:
+          const: false
+        confidenceNote:
+          type: string
+          minLength: 1
+          maxLength: 300
+        establishedAt:
+          type: string
+          format: date-time
+      allOf:
+      - if:
+          properties:
+            status:
+              enum:
+              - CONFIRMED_BMC_WARD
+          required:
+          - status
+        then:
+          properties:
+            confirmationBasis:
+              type: string
+      - if:
+          properties:
+            status:
+              enum:
+              - SPATIALLY_INFERRED_PROVISIONAL
+              - CONFLICT_DISPUTED
+          required:
+          - status
+        then:
+          properties:
+            confirmationBasis:
+              type: 'null'
+    BudgetAllocation:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - displayTitle
+      - budgetBookName
+      - budgetHead
+      - amountPaise
+      - financialYear
+      - departmentId
+      - traceabilityStatus
+      - lastProvenLink
+      - missingNextLink
+      - traceabilityExplanation
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        displayTitle:
+          type: string
+          minLength: 1
+          maxLength: 200
+        budgetBookName:
+          type: string
+          minLength: 1
+          maxLength: 120
+        budgetHead:
+          type: string
+          minLength: 1
+          maxLength: 160
+        amountPaise:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        financialYear:
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}$
+        departmentId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        traceabilityStatus:
+          enum:
+          - LINKED_TO_STREET
+          - GAP_BEFORE_STREET_GEOMETRY
+        lastProvenLink:
+          enum:
+          - BUDGET
+          - TENDER
+          - CONTRACT
+          - WORK_ORDER
+          - ASSET_GEOMETRY
+        missingNextLink:
+          enum:
+          - TENDER
+          - CONTRACT
+          - WORK_ORDER
+          - STREET_LEVEL_GEOMETRY
+          - null
+        traceabilityExplanation:
+          type: string
+          minLength: 1
+          maxLength: 400
+      allOf:
+      - if:
+          properties:
+            traceabilityStatus:
+              const: GAP_BEFORE_STREET_GEOMETRY
+          required:
+          - traceabilityStatus
+        then:
+          properties:
+            missingNextLink:
+              type: string
+            lastProvenLink:
+              enum:
+              - BUDGET
+              - TENDER
+              - CONTRACT
+              - WORK_ORDER
+        else:
+          properties:
+            missingNextLink:
+              type: 'null'
+            lastProvenLink:
+              const: ASSET_GEOMETRY
+    Tender:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - budgetId
+      - tenderReference
+      - title
+      - status
+      - publishedOn
+      - estimatedValuePaise
+      - scopeSummary
+      - locationDescription
+      - streetGeometryAvailable
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        budgetId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        tenderReference:
+          type: string
+          pattern: ^SYN-DEMO-TNR-[A-Z0-9-]+$
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        status:
+          enum:
+          - TENDER_PUBLISHED
+          - CONTRACT_AWARDED
+          - RETENDER_REQUIRED
+        publishedOn:
+          type: string
+          format: date
+        estimatedValuePaise:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        scopeSummary:
+          type: string
+          minLength: 1
+          maxLength: 300
+        locationDescription:
+          type: string
+          minLength: 1
+          maxLength: 300
+        streetGeometryAvailable:
+          type: boolean
+    ContractorRecord:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - displayName
+      - organizationKind
+      - syntheticNote
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 120
+        organizationKind:
+          const: SYNTHETIC_ORGANIZATION
+        syntheticNote:
+          type: string
+          minLength: 1
+          maxLength: 200
+        officialPerformanceRating:
+          type: 'null'
+    Contract:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - tenderId
+      - budgetId
+      - vendorId
+      - displayTitle
+      - contractStatus
+      - awardedOn
+      - valuePaise
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        tenderId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        budgetId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        vendorId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        displayTitle:
+          type: string
+          minLength: 1
+          maxLength: 200
+        contractStatus:
+          enum:
+          - AWARDED
+          - COMPLETED_IN_DLP
+        awardedOn:
+          type: string
+          format: date
+        valuePaise:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+    WorkOrder:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - displayTitle
+      - publicDescription
+      - contractId
+      - assetId
+      - departmentId
+      - valuePaise
+      - startedOn
+      - completionCertifiedOn
+      - dlpEndsAt
+      - status
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        displayTitle:
+          type: string
+          minLength: 1
+          maxLength: 200
+        publicDescription:
+          type: string
+          minLength: 1
+          maxLength: 400
+        contractId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        assetId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        departmentId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        valuePaise:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        startedOn:
+          type: string
+          format: date
+        completionCertifiedOn:
+          type:
+          - string
+          - 'null'
+          format: date
+        dlpEndsAt:
+          type: string
+          format: date-time
+        status:
+          enum:
+          - BUDGETED_PROPOSED
+          - TENDER_PUBLISHED
+          - RETENDER_REQUIRED
+          - CONTRACT_AWARDED
+          - WORK_ORDER_ISSUED
+          - IN_EXECUTION
+          - SUSPENDED
+          - COMPLETION_CERTIFIED_IN_DLP
+          - DEFECT_NOTIFIED
+          - DLP_EXPIRED_ARCHIVED
+    DlpStatus:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - workOrderId
+      - dlpStartsOn
+      - explanation
+      - warrantyPathNote
+      - syntheticFreshRepairEstimatePaise
+      - potentialSpendLabel
+      - dlpEndsAt
+      - evaluatedAt
+      - status
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        workOrderId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        dlpStartsOn:
+          type: string
+          format: date
+        explanation:
+          type: string
+          minLength: 1
+          maxLength: 400
+        warrantyPathNote:
+          type: string
+          minLength: 1
+          maxLength: 400
+        syntheticFreshRepairEstimatePaise:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+          maximum: 9007199254740991
+        potentialSpendLabel:
+          enum:
+          - SYNTHETIC_POTENTIAL_NOT_REALIZED_SAVINGS
+          - null
+        dlpEndsAt:
+          type: string
+          format: date-time
+        evaluatedAt:
+          type: string
+          format: date-time
+        status:
+          enum:
+          - NOT_STARTED
+          - ACTIVE
+          - EXPIRED
+      allOf:
+      - if:
+          properties:
+            syntheticFreshRepairEstimatePaise:
+              type: integer
+          required:
+          - syntheticFreshRepairEstimatePaise
+        then:
+          properties:
+            potentialSpendLabel:
+              const: SYNTHETIC_POTENTIAL_NOT_REALIZED_SAVINGS
+        else:
+          properties:
+            potentialSpendLabel:
+              type: 'null'
+      description: Derived view. status is computed from dlpStartsOn, the work order's dlpEndsAt and evaluatedAt (UTC midnight start, inclusive
+        end); it is never stored.
+    CivicIssue:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - title
+      - publicDescription
+      - category
+      - status
+      - publicStatusExplanation
+      - reportedAt
+      - streetName
+      - nearbyLandmark
+      - geometry
+      - assetId
+      - workOrderId
+      - wardCandidateId
+      - responsibleDepartmentId
+      - responsiblePostTitle
+      - escalationPostTitle
+      - journeys
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        title:
+          type: string
+          minLength: 1
+          maxLength: 160
+        publicDescription:
+          type: string
+          minLength: 1
+          maxLength: 400
+        category:
+          enum:
+          - POTHOLE
+          - DRAIN_BLOCKAGE
+          - WATERLOGGING
+          - FACILITY_REPAIR
+        status:
+          enum:
+          - DRAFT_LOCAL
+          - SUBMITTED_UNVERIFIED
+          - TRIAGED_ASSIGNED
+          - IN_PROGRESS
+          - CLOSURE_CLAIMED_PENDING_VERIFICATION
+          - VERIFIED_COMPLETE
+          - DISPUTED_REOPENED
+        publicStatusExplanation:
+          type: string
+          minLength: 1
+          maxLength: 300
+        reportedAt:
+          type: string
+          format: date-time
+        streetName:
+          type: string
+          minLength: 1
+          maxLength: 120
+        nearbyLandmark:
+          type: string
+          minLength: 1
+          maxLength: 160
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        assetId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        workOrderId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        wardCandidateId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        responsibleDepartmentId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        responsiblePostTitle:
+          type: string
+          minLength: 1
+          maxLength: 160
+        escalationPostTitle:
+          type: string
+          minLength: 1
+          maxLength: 160
+        parentRecurrenceId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        journeys:
+          type: array
+          items:
+            enum:
+            - J1
+            - J2
+            - J3
+            - J4
+            - J5
+            - J6
+            - PREVIEW
+          minItems: 1
+          uniqueItems: true
+    Evidence:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - issueId
+      - stage
+      - caption
+      - confidence
+      - sourceType
+      - capturedAt
+      - locationConfidence
+      - distanceToAssetMeters
+      - mediaStatus
+      - mediaRef
+      - sha256
+      - hashBasis
+      - verificationState
+      - processingState
+      - caveat
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        issueId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        stage:
+          enum:
+          - BEFORE
+          - CLAIMED_AFTER
+          - DISPUTED_OR_RECURRING
+        caption:
+          type: string
+          minLength: 1
+          maxLength: 300
+        confidence:
+          enum:
+          - CITIZEN_SUBMITTED
+          - AUTHORITY_SUBMITTED
+          - INDEPENDENTLY_VERIFIED
+        sourceType:
+          enum:
+          - CITIZEN_FIXTURE
+          - AUTHORITY_FIXTURE
+          - INDEPENDENT_FIXTURE
+        capturedAt:
+          type: string
+          format: date-time
+        locationConfidence:
+          enum:
+          - LOCATION_CONSISTENT
+          - LOCATION_UNVERIFIED
+          - LOCATION_INCONSISTENT
+        distanceToAssetMeters:
+          type:
+          - number
+          - 'null'
+          minimum: 0
+        mediaStatus:
+          const: SYNTHETIC_FIXTURE_REFERENCE_ONLY
+        mediaRef:
+          type: string
+          pattern: ^fixtures/evidence/SYN-DEMO-[A-Z0-9-]+\.svg$
+        sha256:
+          type: string
+          pattern: ^[a-f0-9]{64}$
+        hashBasis:
+          const: FIXTURE_REFERENCE_STRING
+        verificationState:
+          enum:
+          - NOT_VERIFIED
+          - CORROBORATED
+          - INDEPENDENTLY_VERIFIED
+        processingState:
+          enum:
+          - UPLOADED_QUARANTINE
+          - PROCESSING
+          - READY_FOR_REVIEW
+          - PROCESSING_FAILED
+          - MANUAL_REVIEW
+          - PUBLISHED_PUBLIC
+          - REJECTED
+        caveat:
+          type: string
+          minLength: 1
+          maxLength: 400
+    CompletionClaim:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - issueId
+      - workOrderId
+      - claimedAt
+      - claimedByPostTitle
+      - atrSummary
+      - claimedAfterEvidenceId
+      - verificationWindowEndsAt
+      - claimNote
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        issueId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        workOrderId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        claimedAt:
+          type: string
+          format: date-time
+        claimedByPostTitle:
+          type: string
+          minLength: 1
+          maxLength: 160
+        atrSummary:
+          type: string
+          minLength: 1
+          maxLength: 400
+        claimedAfterEvidenceId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        verificationWindowEndsAt:
+          type: string
+          format: date-time
+        claimNote:
+          type: string
+          minLength: 1
+          maxLength: 300
+    Verification:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - issueId
+      - completionClaimId
+      - state
+      - windowOpensAt
+      - windowEndsAt
+      - citizenVerdict
+      - verdictAt
+      - disputeEvidenceId
+      - silenceNote
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        issueId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        completionClaimId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        state:
+          enum:
+          - AWAITING_AUTHORITY_CLAIM
+          - WINDOW_OPEN
+          - CITIZEN_CONFIRMED
+          - CITIZEN_PARTLY_FIXED
+          - CITIZEN_DISPUTED
+          - WINDOW_EXPIRED_NO_VERDICT
+          - INDEPENDENT_REVIEW_PENDING
+          - INDEPENDENTLY_VERIFIED
+        windowOpensAt:
+          type: string
+          format: date-time
+        windowEndsAt:
+          type: string
+          format: date-time
+        citizenVerdict:
+          enum:
+          - FIXED
+          - PARTLY_FIXED
+          - STILL_UNRESOLVED
+          - null
+        verdictAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        disputeEvidenceId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        silenceNote:
+          type: string
+          minLength: 1
+          maxLength: 300
+      allOf:
+      - if:
+          properties:
+            state:
+              enum:
+              - WINDOW_OPEN
+              - AWAITING_AUTHORITY_CLAIM
+              - WINDOW_EXPIRED_NO_VERDICT
+          required:
+          - state
+        then:
+          properties:
+            citizenVerdict:
+              type: 'null'
+            verdictAt:
+              type: 'null'
+    Correction:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - entityId
+      - fieldPath
+      - priorValue
+      - proposedValue
+      - status
+      - reason
+      - submittedAt
+      - adjudicationNote
+      - appealNote
+      - priorValuePreserved
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        entityId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        fieldPath:
+          type: string
+          pattern: ^/[A-Za-z0-9/_-]+$
+        priorValue: {}
+        proposedValue: {}
+        status:
+          enum:
+          - CHALLENGE_SUBMITTED
+          - UNDER_REVIEW
+          - ACCEPTED_AMENDED
+          - REJECTED_WITH_REASON
+          - APPEAL_SUBMITTED
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 300
+        submittedAt:
+          type: string
+          format: date-time
+        adjudicationNote:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          maxLength: 400
+        appealNote:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          maxLength: 400
+        priorValuePreserved:
+          const: true
+    LifecycleEvent:
+      type: object
+      additionalProperties: false
+      description: Append-oriented, hash-linked event. payloadHash = sha256 of entityId|sequence|eventType|occurredAt|actorRole|summary|previousHash-or-GENESIS.
+        A hash chain makes edits detectable inside this demonstration; it does not guarantee storage integrity.
+      required:
+      - id
+      - recordNature
+      - sourceTier
+      - recordVersion
+      - updatedAt
+      - entityId
+      - sequence
+      - eventType
+      - actorRole
+      - occurredAt
+      - summary
+      - previousHash
+      - payloadHash
+      properties:
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+        sourceTier:
+          enum:
+          - SYNTHETIC_DEMO
+          - COMMUNITY_REFERENCE
+          - OFFICIAL_SOURCE_PENDING
+        recordVersion:
+          type: integer
+          minimum: 1
+        updatedAt:
+          type: string
+          format: date-time
+        entityId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        sequence:
+          type: integer
+          minimum: 1
+        eventType:
+          type: string
+          pattern: ^[A-Z][A-Z_]+$
+        actorRole:
+          enum:
+          - public
+          - citizen
+          - authority
+          - moderator
+          - independent_reviewer
+          - demo_admin
+          - system
+        occurredAt:
+          type: string
+          format: date-time
+        summary:
+          type: string
+          minLength: 1
+          maxLength: 400
+        previousHash:
+          type:
+          - string
+          - 'null'
+          pattern: ^[a-f0-9]{64}$
+        payloadHash:
+          type: string
+          pattern: ^[a-f0-9]{64}$
+    Problem:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - title
+      - status
+      - correlationId
+      description: RFC 9457 problem details.
+      properties:
+        type:
+          type: string
+          format: uri-reference
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        status:
+          type: integer
+          minimum: 400
+          maximum: 599
+        detail:
+          type: string
+          minLength: 1
+          maxLength: 600
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    SubmitIssuePayload:
+      type: object
+      additionalProperties: false
+      required:
+      - category
+      - geometry
+      - title
+      - publicDescription
+      - nearbyLandmark
+      - assetId
+      properties:
+        category:
+          enum:
+          - POTHOLE
+          - DRAIN_BLOCKAGE
+          - WATERLOGGING
+          - FACILITY_REPAIR
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        title:
+          type: string
+          minLength: 1
+          maxLength: 160
+        publicDescription:
+          type: string
+          minLength: 1
+          maxLength: 400
+        nearbyLandmark:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          maxLength: 160
+        assetId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+    SubmitIssueCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/SubmitIssuePayload'
+    CheckDuplicatesPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - category
+      - geometry
+      - descriptionKeywords
+      properties:
+        category:
+          enum:
+          - POTHOLE
+          - DRAIN_BLOCKAGE
+          - WATERLOGGING
+          - FACILITY_REPAIR
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        descriptionKeywords:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 40
+    CheckDuplicatesCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/CheckDuplicatesPayload'
+    AddEvidencePayload:
+      type: object
+      additionalProperties: false
+      required:
+      - stage
+      - caption
+      - sourceType
+      - capturedAt
+      - mediaRef
+      - sha256
+      - duplicateChoice
+      properties:
+        stage:
+          enum:
+          - BEFORE
+          - CLAIMED_AFTER
+          - DISPUTED_OR_RECURRING
+        caption:
+          type: string
+          minLength: 1
+          maxLength: 300
+        sourceType:
+          enum:
+          - CITIZEN_FIXTURE
+          - AUTHORITY_FIXTURE
+          - INDEPENDENT_FIXTURE
+        capturedAt:
+          type: string
+          format: date-time
+        mediaRef:
+          type: string
+          pattern: ^fixtures/evidence/SYN-DEMO-[A-Z0-9-]+\.svg$
+        sha256:
+          type: string
+          pattern: ^[a-f0-9]{64}$
+        duplicateChoice:
+          enum:
+          - ADD_EVIDENCE_TO_EXISTING
+          - ENDORSE_EXISTING
+          - CREATE_SEPARATE_ISSUE
+          - null
+    AddEvidenceCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/AddEvidencePayload'
+    ResolveJurisdictionPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - targetStatus
+      - externalAgencyLabel
+      - rationale
+      properties:
+        targetStatus:
+          enum:
+          - CONFIRMED_BMC_WARD
+          - EXTERNAL_AGENCY_ASSIGNED
+          - HANDOFF_LOGGED
+        externalAgencyLabel:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          maxLength: 160
+        rationale:
+          type: string
+          minLength: 1
+          maxLength: 400
+    ResolveJurisdictionCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/ResolveJurisdictionPayload'
+    LinkWorkPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - workOrderId
+      - rationale
+      properties:
+        workOrderId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        rationale:
+          type: string
+          minLength: 1
+          maxLength: 400
+    LinkWorkCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/LinkWorkPayload'
+    ClaimCompletionPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - workOrderId
+      - atrSummary
+      - claimedAfterEvidenceId
+      properties:
+        workOrderId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        atrSummary:
+          type: string
+          minLength: 1
+          maxLength: 400
+        claimedAfterEvidenceId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+    ClaimCompletionCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/ClaimCompletionPayload'
+    VerifyResolutionPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - verdict
+      - note
+      - evidenceId
+      properties:
+        verdict:
+          enum:
+          - FIXED
+          - PARTLY_FIXED
+          - STILL_UNRESOLVED
+        note:
+          type: string
+          minLength: 1
+          maxLength: 400
+        evidenceId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+    VerifyResolutionCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/VerifyResolutionPayload'
+    SubmitCorrectionPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - fieldPath
+      - proposedValue
+      - reason
+      properties:
+        fieldPath:
+          type: string
+          pattern: ^/[A-Za-z0-9/_-]+$
+        proposedValue: {}
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 300
+    SubmitCorrectionCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/SubmitCorrectionPayload'
+    DecideCorrectionPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - decision
+      - adjudicationNote
+      properties:
+        decision:
+          enum:
+          - ACCEPT_AMENDED
+          - REJECT_WITH_REASON
+        adjudicationNote:
+          type: string
+          minLength: 1
+          maxLength: 400
+    DecideCorrectionCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/DecideCorrectionPayload'
+    AppealCorrectionPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - appealNote
+      properties:
+        appealNote:
+          type: string
+          minLength: 1
+          maxLength: 400
+    AppealCorrectionCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/AppealCorrectionPayload'
+    ResetDemoPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - checkpoint
+      properties:
+        checkpoint:
+          const: CP-00
+    ResetDemoCommand:
+      type: object
+      additionalProperties: false
+      required:
+      - recordVersion
+      - payload
+      properties:
+        recordVersion:
+          type: integer
+          minimum: 1
+          description: Optimistic-concurrency version of the target record (1 for a new draft).
+        payload:
+          $ref: '#/components/schemas/ResetDemoPayload'
+    BudgetTrace:
+      type: object
+      additionalProperties: false
+      required:
+      - budget
+      - tender
+      - contract
+      - contractor
+      - workOrder
+      - asset
+      - traceabilityStatus
+      - lastProvenLink
+      - missingNextLink
+      - explanation
+      properties:
+        budget:
+          $ref: '#/components/schemas/BudgetAllocation'
+        tender:
+          oneOf:
+          - $ref: '#/components/schemas/Tender'
+          - type: 'null'
+        contract:
+          oneOf:
+          - $ref: '#/components/schemas/Contract'
+          - type: 'null'
+        contractor:
+          oneOf:
+          - $ref: '#/components/schemas/ContractorRecord'
+          - type: 'null'
+        workOrder:
+          oneOf:
+          - $ref: '#/components/schemas/WorkOrder'
+          - type: 'null'
+        asset:
+          oneOf:
+          - $ref: '#/components/schemas/CivicAsset'
+          - type: 'null'
+        traceabilityStatus:
+          enum:
+          - LINKED_TO_STREET
+          - GAP_BEFORE_STREET_GEOMETRY
+        lastProvenLink:
+          enum:
+          - BUDGET
+          - TENDER
+          - CONTRACT
+          - WORK_ORDER
+          - ASSET_GEOMETRY
+        missingNextLink:
+          enum:
+          - TENDER
+          - CONTRACT
+          - WORK_ORDER
+          - STREET_LEVEL_GEOMETRY
+          - null
+        explanation:
+          type: string
+          minLength: 1
+          maxLength: 400
+    Kundali:
+      type: object
+      additionalProperties: false
+      required:
+      - syntheticBanner
+      - canonicalDemoPath
+      - issue
+      - ward
+      - asset
+      - responsibleDepartment
+      - jurisdiction
+      - workOrder
+      - dlpStatus
+      - budgetTrace
+      - evidence
+      - completionClaim
+      - verification
+      - corrections
+      - auditEvents
+      properties:
+        syntheticBanner:
+          const: DEMONSTRATION - SYNTHETIC DATA - NOT AN OFFICIAL BMC PORTAL
+        canonicalDemoPath:
+          type: string
+          pattern: ^/demo/kundali/SYN-DEMO-[A-Z0-9-]+$
+          description: Reserved public path, derived from the issue id, for a later static proposed-pilot-pattern QR card. No live resolver exists.
+        issue:
+          $ref: '#/components/schemas/CivicIssue'
+        ward:
+          oneOf:
+          - $ref: '#/components/schemas/Ward'
+          - type: 'null'
+        asset:
+          oneOf:
+          - $ref: '#/components/schemas/CivicAsset'
+          - type: 'null'
+        responsibleDepartment:
+          $ref: '#/components/schemas/Department'
+        jurisdiction:
+          $ref: '#/components/schemas/Jurisdiction'
+        workOrder:
+          oneOf:
+          - $ref: '#/components/schemas/WorkOrder'
+          - type: 'null'
+        dlpStatus:
+          oneOf:
+          - $ref: '#/components/schemas/DlpStatus'
+          - type: 'null'
+        budgetTrace:
+          oneOf:
+          - $ref: '#/components/schemas/BudgetTrace'
+          - type: 'null'
+        evidence:
+          type: array
+          items:
+            $ref: '#/components/schemas/Evidence'
+        completionClaim:
+          oneOf:
+          - $ref: '#/components/schemas/CompletionClaim'
+          - type: 'null'
+        verification:
+          oneOf:
+          - $ref: '#/components/schemas/Verification'
+          - type: 'null'
+        corrections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Correction'
+        auditEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/LifecycleEvent'
+    WorkOrderDetail:
+      type: object
+      additionalProperties: false
+      required:
+      - workOrder
+      - contract
+      - contractor
+      - asset
+      - dlpStatus
+      - linkedIssueIds
+      properties:
+        workOrder:
+          $ref: '#/components/schemas/WorkOrder'
+        contract:
+          $ref: '#/components/schemas/Contract'
+        contractor:
+          $ref: '#/components/schemas/ContractorRecord'
+        asset:
+          $ref: '#/components/schemas/CivicAsset'
+        dlpStatus:
+          oneOf:
+          - $ref: '#/components/schemas/DlpStatus'
+          - type: 'null'
+        linkedIssueIds:
+          type: array
+          items:
+            type: string
+            pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+    MapFeatureProperties:
+      type: object
+      additionalProperties: false
+      required:
+      - kind
+      - recordId
+      - title
+      - category
+      - status
+      - wardId
+      - dlpActive
+      - recordNature
+      properties:
+        kind:
+          enum:
+          - ISSUE
+          - ASSET
+          - PUBLIC_WORK
+        recordId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        title:
+          type: string
+          minLength: 1
+          maxLength: 160
+        category:
+          enum:
+          - POTHOLE
+          - DRAIN_BLOCKAGE
+          - WATERLOGGING
+          - FACILITY_REPAIR
+          - null
+        status:
+          type:
+          - string
+          - 'null'
+        wardId:
+          type:
+          - string
+          - 'null'
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        dlpActive:
+          type: boolean
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+    MapFeature:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - id
+      - geometry
+      - properties
+      properties:
+        type:
+          const: Feature
+        id:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        properties:
+          $ref: '#/components/schemas/MapFeatureProperties'
+    MapFeatureCollection:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - features
+      properties:
+        type:
+          const: FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/MapFeature'
+    IssueList:
+      type: object
+      additionalProperties: false
+      required:
+      - items
+      - total
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CivicIssue'
+        total:
+          type: integer
+          minimum: 0
+    DlpExceptionItem:
+      type: object
+      additionalProperties: false
+      required:
+      - issueId
+      - candidateWorkOrderId
+      - dlpStatus
+      - warrantyPathNote
+      - potentialSpendLabel
+      - syntheticFreshRepairEstimatePaise
+      properties:
+        issueId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        candidateWorkOrderId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        dlpStatus:
+          $ref: '#/components/schemas/DlpStatus'
+        warrantyPathNote:
+          type: string
+          minLength: 1
+          maxLength: 400
+        potentialSpendLabel:
+          const: SYNTHETIC_POTENTIAL_NOT_REALIZED_SAVINGS
+        syntheticFreshRepairEstimatePaise:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+    DlpExceptionList:
+      type: object
+      additionalProperties: false
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DlpExceptionItem'
+    AuthorityDashboard:
+      type: object
+      additionalProperties: false
+      required:
+      - asOf
+      - openIssueCount
+      - awaitingVerificationIssueIds
+      - uncertainJurisdictionIssueIds
+      - dlpExceptionIssueIds
+      - traceabilityGapBudgetIds
+      properties:
+        asOf:
+          type: string
+          format: date-time
+        openIssueCount:
+          type: integer
+          minimum: 0
+        awaitingVerificationIssueIds:
+          type: array
+          items:
+            type: string
+            pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        uncertainJurisdictionIssueIds:
+          type: array
+          items:
+            type: string
+            pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        dlpExceptionIssueIds:
+          type: array
+          items:
+            type: string
+            pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        traceabilityGapBudgetIds:
+          type: array
+          items:
+            type: string
+            pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+    DuplicateScoreBreakdown:
+      type: object
+      additionalProperties: false
+      required:
+      - sameAssetOrSegment
+      - sameCategory
+      - withinConfiguredRadius
+      - withinConfiguredWindow
+      - keywordOverlap
+      properties:
+        sameAssetOrSegment:
+          type: integer
+          minimum: 0
+          maximum: 40
+        sameCategory:
+          type: integer
+          minimum: 0
+          maximum: 20
+        withinConfiguredRadius:
+          type: integer
+          minimum: 0
+          maximum: 20
+        withinConfiguredWindow:
+          type: integer
+          minimum: 0
+          maximum: 10
+        keywordOverlap:
+          type: integer
+          minimum: 0
+          maximum: 10
+    DuplicateCandidate:
+      type: object
+      additionalProperties: false
+      required:
+      - issueId
+      - score
+      - band
+      - breakdown
+      - possibleRecurrence
+      properties:
+        issueId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+        band:
+          enum:
+          - LIKELY_SAME
+          - POSSIBLE_MATCH
+          - PROBABLY_DISTINCT
+        breakdown:
+          $ref: '#/components/schemas/DuplicateScoreBreakdown'
+        possibleRecurrence:
+          type: boolean
+    DuplicateCandidates:
+      type: object
+      additionalProperties: false
+      required:
+      - policyLabel
+      - choices
+      - silentRejection
+      - candidates
+      properties:
+        policyLabel:
+          const: DEMONSTRATION_HEURISTIC_V1
+        choices:
+          type: array
+          items:
+            enum:
+            - ENDORSE_EXISTING
+            - ADD_EVIDENCE_TO_EXISTING
+            - CREATE_SEPARATE_ISSUE
+          minItems: 3
+        silentRejection:
+          const: false
+        candidates:
+          type: array
+          items:
+            $ref: '#/components/schemas/DuplicateCandidate'
+    AuditTimeline:
+      type: object
+      additionalProperties: false
+      required:
+      - entityId
+      - events
+      - hashChainNote
+      properties:
+        entityId:
+          type: string
+          pattern: ^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/LifecycleEvent'
+        hashChainNote:
+          const: Append-oriented, hash-linked log for this demonstration; edits are detectable, not impossible.
+    ResetReport:
+      type: object
+      additionalProperties: false
+      required:
+      - checkpoint
+      - recordCounts
+      - baselineDigest
+      properties:
+        checkpoint:
+          const: CP-00
+        recordCounts:
+          type: object
+          additionalProperties:
+            type: integer
+            minimum: 0
+        baselineDigest:
+          type: string
+          pattern: ^[a-f0-9]{64}$
+    HealthLive:
+      type: object
+      additionalProperties: false
+      required:
+      - status
+      properties:
+        status:
+          const: UP
+    HealthReady:
+      type: object
+      additionalProperties: false
+      required:
+      - status
+      - database
+      - postgisVersion
+      properties:
+        status:
+          enum:
+          - READY
+          - NOT_READY
+        database:
+          enum:
+          - UP
+          - DOWN
+        postgisVersion:
+          type:
+          - string
+          - 'null'
+    VersionInfo:
+      type: object
+      additionalProperties: false
+      required:
+      - apiVersion
+      - packageVersion
+      - recordNature
+      properties:
+        apiVersion:
+          type: string
+        packageVersion:
+          const: 1.2.3
+        recordNature:
+          const: SYNTHETIC_DEMONSTRATION
+    CivicIssueResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/CivicIssue'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    IssueListResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/IssueList'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    KundaliResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/Kundali'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    WorkOrderDetailResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkOrderDetail'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    BudgetTraceResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/BudgetTrace'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    MapFeatureCollectionResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/MapFeatureCollection'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    AuthorityDashboardResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthorityDashboard'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    DlpExceptionListResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/DlpExceptionList'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    DuplicateCandidatesResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/DuplicateCandidates'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    EvidenceResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/Evidence'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    JurisdictionResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/Jurisdiction'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    CompletionClaimResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/CompletionClaim'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    VerificationResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/Verification'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    CorrectionResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/Correction'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    AuditTimelineResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/AuditTimeline'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+    ResetReportResult:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - correlationId
+      properties:
+        data:
+          $ref: '#/components/schemas/ResetReport'
+        correlationId:
+          type: string
+          minLength: 1
+          maxLength: 128
+  responses:
+    CivicIssueOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CivicIssueResult'
+      headers:
+        ETag: &id001
+          description: 'Entity tag derived strictly from recordVersion of the returned record: "{recordVersion}".'
+          schema:
+            type: string
+            pattern: ^"[0-9]+"$
+    IssueListOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IssueListResult'
+    KundaliOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KundaliResult'
+      headers:
+        ETag: *id001
+    WorkOrderDetailOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WorkOrderDetailResult'
+      headers:
+        ETag: *id001
+    BudgetTraceOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BudgetTraceResult'
+    MapFeatureCollectionOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MapFeatureCollectionResult'
+    AuthorityDashboardOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthorityDashboardResult'
+    DlpExceptionListOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DlpExceptionListResult'
+    DuplicateCandidatesOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DuplicateCandidatesResult'
+    EvidenceOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EvidenceResult'
+      headers:
+        ETag: *id001
+    JurisdictionOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JurisdictionResult'
+      headers:
+        ETag: *id001
+    CompletionClaimOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompletionClaimResult'
+      headers:
+        ETag: *id001
+    VerificationOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VerificationResult'
+      headers:
+        ETag: *id001
+    CorrectionOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CorrectionResult'
+      headers:
+        ETag: *id001
+    AuditTimelineOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuditTimelineResult'
+    ResetReportOk:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResetReportResult'
+    HealthLiveOk:
+      description: Liveness
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthLive'
+    HealthReadyOk:
+      description: Readiness
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthReady'
+    VersionInfoOk:
+      description: Version
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VersionInfo'
+    BadRequest:
+      description: Malformed request (RFC 9457)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    Unauthorized:
+      description: Missing or unrecognised simulated demonstration persona (RFC 9457); not an authentication result
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    Forbidden:
+      description: 'Simulated demonstration workflow eligibility: this persona is not eligible for the step in the demonstration workflow (RFC
+        9457); never real authorization'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    NotFound:
+      description: Record not found (RFC 9457)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    Conflict:
+      description: 'Stale write or state conflict: recordVersion (and any If-Match, which must equal its quoted form) does not match the current
+        record (RFC 9457)'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    Unprocessable:
+      description: Validation or state-machine rule violated (RFC 9457)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+paths:
+  /health/live:
+    get:
+      operationId: healthLive
+      summary: Liveness probe
+      parameters: []
+      responses:
+        '200':
+          $ref: '#/components/responses/HealthLiveOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security: []
+  /health/ready:
+    get:
+      operationId: healthReady
+      summary: Readiness probe (database and PostGIS)
+      parameters: []
+      responses:
+        '200':
+          $ref: '#/components/responses/HealthReadyOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security: []
+  /version:
+    get:
+      operationId: getVersion
+      summary: Package version
+      parameters: []
+      responses:
+        '200':
+          $ref: '#/components/responses/VersionInfoOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security: []
+  /v1/map/features:
+    get:
+      operationId: getMapFeatures
+      summary: Map features in a bounding box
+      parameters:
+      - $ref: '#/components/parameters/Bbox'
+      - $ref: '#/components/parameters/Ward'
+      - $ref: '#/components/parameters/Category'
+      - $ref: '#/components/parameters/Status'
+      - $ref: '#/components/parameters/DlpOnly'
+      responses:
+        '200':
+          $ref: '#/components/responses/MapFeatureCollectionOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/issues:
+    get:
+      operationId: listIssues
+      summary: List issues (1:1 parity with map filters)
+      parameters:
+      - $ref: '#/components/parameters/Ward'
+      - $ref: '#/components/parameters/Category'
+      - $ref: '#/components/parameters/Status'
+      - $ref: '#/components/parameters/DlpOnly'
+      responses:
+        '200':
+          $ref: '#/components/responses/IssueListOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      operationId: submitIssue
+      summary: Submit a synthetic issue
+      parameters:
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          $ref: '#/components/responses/CivicIssueOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitIssueCommand'
+  /v1/issues/{id}:
+    get:
+      operationId: getIssue
+      summary: Issue summary
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/CivicIssueOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/issues/{id}/duplicate-candidates:
+    post:
+      operationId: checkDuplicates
+      summary: Deterministic duplicate check with three choices
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          $ref: '#/components/responses/DuplicateCandidatesOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckDuplicatesCommand'
+  /v1/issues/{id}/evidence:
+    post:
+      operationId: addEvidence
+      summary: Attach synthetic evidence metadata
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          $ref: '#/components/responses/EvidenceOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddEvidenceCommand'
+  /v1/kundalis/{id}:
+    get:
+      operationId: getKundali
+      summary: Civic Issue Kundali dossier
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/KundaliOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/works/{id}:
+    get:
+      operationId: getWorkOrder
+      summary: Work order, contract, contractor and DLP
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/WorkOrderDetailOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/budget-traces/{id}:
+    get:
+      operationId: getBudgetTrace
+      summary: Budget to street trace, including honest gaps
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/BudgetTraceOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/authority/dashboard:
+    get:
+      operationId: getAuthorityDashboard
+      summary: Authority queues and counts
+      parameters: []
+      responses:
+        '200':
+          $ref: '#/components/responses/AuthorityDashboardOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /v1/authority/issues/{id}/jurisdiction:
+    post:
+      operationId: resolveJurisdiction
+      summary: Resolve a disputed or provisional jurisdiction
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          $ref: '#/components/responses/JurisdictionOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResolveJurisdictionCommand'
+  /v1/authority/issues/{id}/work-link:
+    post:
+      operationId: linkWork
+      summary: Link an unlinked defect to a work order
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          $ref: '#/components/responses/CivicIssueOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkWorkCommand'
+  /v1/authority/dlp-exceptions:
+    get:
+      operationId: listDlpExceptions
+      summary: Unlinked defects inside an active DLP period
+      parameters: []
+      responses:
+        '200':
+          $ref: '#/components/responses/DlpExceptionListOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /v1/authority/issues/{id}/completion-claim:
+    post:
+      operationId: claimCompletion
+      summary: Claim completion (not verification)
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          $ref: '#/components/responses/CompletionClaimOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimCompletionCommand'
+  /v1/issues/{id}/verification:
+    post:
+      operationId: verifyResolution
+      summary: Citizen verdict on a completion claim
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          $ref: '#/components/responses/VerificationOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyResolutionCommand'
+  /v1/records/{id}/corrections:
+    post:
+      operationId: submitCorrection
+      summary: File a correction; the prior value is preserved
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          $ref: '#/components/responses/CorrectionOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitCorrectionCommand'
+  /v1/corrections/{id}/decision:
+    post:
+      operationId: decideCorrection
+      summary: Accept with amendment or reject with reason
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          $ref: '#/components/responses/CorrectionOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DecideCorrectionCommand'
+  /v1/corrections/{id}/appeal:
+    post:
+      operationId: appealCorrection
+      summary: Appeal a rejected correction
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          $ref: '#/components/responses/CorrectionOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppealCorrectionCommand'
+  /v1/audit/{entityId}:
+    get:
+      operationId: getAuditTimeline
+      summary: Append-oriented hash-linked timeline
+      parameters:
+      - $ref: '#/components/parameters/EntityId'
+      responses:
+        '200':
+          $ref: '#/components/responses/AuditTimelineOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/demo/reset:
+    post:
+      operationId: resetDemo
+      summary: Reset to the deterministic CP-00 baseline
+      parameters:
+      - $ref: '#/components/parameters/CorrelationId'
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          $ref: '#/components/responses/ResetReportOk'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetDemoCommand'

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "completion-claim",
+  "required": [
+    "id",
+    "recordNature",
+    "sourceTier",
+    "recordVersion",
+    "updatedAt",
+    "issueId",
+    "workOrderId",
+    "claimedAt",
+    "claimedByPostTitle",
+    "atrSummary",
+    "claimedAfterEvidenceId",
+    "verificationWindowEndsAt",
+    "claimNote"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "recordNature": {
+      "const": "SYNTHETIC_DEMONSTRATION"
+    },
+    "sourceTier": {
+      "enum": [
+        "SYNTHETIC_DEMO",
+        "COMMUNITY_REFERENCE",
+        "OFFICIAL_SOURCE_PENDING"
+      ]
+    },
+    "recordVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "issueId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "workOrderId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "claimedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "claimedByPostTitle": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "atrSummary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "claimedAfterEvidenceId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "verificationWindowEndsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "claimNote": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    }
+  }
+}

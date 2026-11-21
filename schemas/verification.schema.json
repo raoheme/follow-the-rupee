@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "verification",
+  "required": [
+    "id",
+    "recordNature",
+    "sourceTier",
+    "recordVersion",
+    "updatedAt",
+    "issueId",
+    "completionClaimId",
+    "state",
+    "windowOpensAt",
+    "windowEndsAt",
+    "citizenVerdict",
+    "verdictAt",
+    "disputeEvidenceId",
+    "silenceNote"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "recordNature": {
+      "const": "SYNTHETIC_DEMONSTRATION"
+    },
+    "sourceTier": {
+      "enum": [
+        "SYNTHETIC_DEMO",
+        "COMMUNITY_REFERENCE",
+        "OFFICIAL_SOURCE_PENDING"
+      ]
+    },
+    "recordVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "issueId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "completionClaimId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "state": {
+      "enum": [
+        "AWAITING_AUTHORITY_CLAIM",
+        "WINDOW_OPEN",
+        "CITIZEN_CONFIRMED",
+        "CITIZEN_PARTLY_FIXED",
+        "CITIZEN_DISPUTED",
+        "WINDOW_EXPIRED_NO_VERDICT",
+        "INDEPENDENT_REVIEW_PENDING",
+        "INDEPENDENTLY_VERIFIED"
+      ]
+    },
+    "windowOpensAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "windowEndsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "citizenVerdict": {
+      "enum": [
+        "FIXED",
+        "PARTLY_FIXED",
+        "STILL_UNRESOLVED",
+        null
+      ]
+    },
+    "verdictAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "disputeEvidenceId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "silenceNote": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "WINDOW_OPEN",
+              "AWAITING_AUTHORITY_CLAIM",
+              "WINDOW_EXPIRED_NO_VERDICT"
+            ]
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "citizenVerdict": {
+            "type": "null"
+          },
+          "verdictAt": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

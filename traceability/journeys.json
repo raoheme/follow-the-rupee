@@ -1,0 +1,133 @@
+{
+  "journeys": [
+    {
+      "id": "J1",
+      "requirementIds": [
+        "R-01",
+        "R-04",
+        "R-07"
+      ],
+      "pageIds": [
+        "PAGE-01",
+        "PAGE-02",
+        "PAGE-03"
+      ],
+      "operationIds": [
+        "getMapFeatures",
+        "getKundali",
+        "getWorkOrder",
+        "getBudgetTrace"
+      ],
+      "test": "tests/e2e/journey-1.spec.ts",
+      "seedStatus": "PRESENT",
+      "testStatus": "NOT_YET_IMPLEMENTED"
+    },
+    {
+      "id": "J2",
+      "requirementIds": [
+        "R-02",
+        "R-03"
+      ],
+      "pageIds": [
+        "PAGE-01",
+        "PAGE-04",
+        "PAGE-05",
+        "PAGE-06",
+        "PAGE-02"
+      ],
+      "operationIds": [
+        "submitIssue",
+        "checkDuplicates",
+        "getKundali"
+      ],
+      "test": "tests/e2e/journey-2.spec.ts",
+      "seedStatus": "PRESENT",
+      "testStatus": "NOT_YET_IMPLEMENTED"
+    },
+    {
+      "id": "J3",
+      "requirementIds": [
+        "R-04",
+        "R-10"
+      ],
+      "pageIds": [
+        "PAGE-01",
+        "PAGE-02",
+        "PAGE-03",
+        "PAGE-08",
+        "PAGE-09",
+        "PAGE-10"
+      ],
+      "operationIds": [
+        "getKundali",
+        "listDlpExceptions",
+        "linkWork"
+      ],
+      "test": "tests/e2e/journey-3.spec.ts",
+      "seedStatus": "PRESENT",
+      "testStatus": "NOT_YET_IMPLEMENTED"
+    },
+    {
+      "id": "J4",
+      "requirementIds": [
+        "R-02",
+        "R-04"
+      ],
+      "pageIds": [
+        "PAGE-02",
+        "PAGE-08",
+        "PAGE-09"
+      ],
+      "operationIds": [
+        "getKundali",
+        "resolveJurisdiction"
+      ],
+      "test": "tests/e2e/journey-4.spec.ts",
+      "seedStatus": "PRESENT",
+      "testStatus": "NOT_YET_IMPLEMENTED"
+    },
+    {
+      "id": "J5",
+      "requirementIds": [
+        "R-05"
+      ],
+      "pageIds": [
+        "PAGE-02",
+        "PAGE-07",
+        "PAGE-08",
+        "PAGE-10"
+      ],
+      "operationIds": [
+        "claimCompletion",
+        "verifyResolution",
+        "getAuditTimeline"
+      ],
+      "test": "tests/e2e/journey-5.spec.ts",
+      "seedStatus": "PRESENT",
+      "testStatus": "NOT_YET_IMPLEMENTED"
+    },
+    {
+      "id": "J6",
+      "requirementIds": [
+        "R-06",
+        "R-07",
+        "R-08"
+      ],
+      "pageIds": [
+        "PAGE-02",
+        "PAGE-11",
+        "PAGE-12"
+      ],
+      "operationIds": [
+        "submitCorrection",
+        "decideCorrection",
+        "appealCorrection",
+        "getAuditTimeline",
+        "resetDemo"
+      ],
+      "test": "tests/e2e/journey-6.spec.ts",
+      "seedStatus": "PRESENT",
+      "testStatus": "NOT_YET_IMPLEMENTED"
+    }
+  ]
+}

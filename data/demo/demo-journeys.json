@@ -1,0 +1,44 @@
+{
+  "journeys": [
+    {
+      "id": "J1",
+      "seedIssueIds": [
+        "SYN-DEMO-KND-001"
+      ]
+    },
+    {
+      "id": "J2",
+      "seedIssueIds": [
+        "SYN-DEMO-KND-002"
+      ]
+    },
+    {
+      "id": "J3",
+      "seedIssueIds": [
+        "SYN-DEMO-KND-004"
+      ]
+    },
+    {
+      "id": "J4",
+      "seedIssueIds": [
+        "SYN-DEMO-KND-003"
+      ]
+    },
+    {
+      "id": "J5",
+      "seedIssueIds": [
+        "SYN-DEMO-KND-001"
+      ]
+    },
+    {
+      "id": "J6",
+      "seedIssueIds": [
+        "SYN-DEMO-KND-003"
+      ]
+    }
+  ],
+  "scalePreviewIssueIds": [
+    "SYN-DEMO-KND-005",
+    "SYN-DEMO-KND-006"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "lifecycle-event",
+  "description": "Append-oriented, hash-linked event. payloadHash = sha256 of entityId|sequence|eventType|occurredAt|actorRole|summary|previousHash-or-GENESIS. A hash chain makes edits detectable inside this demonstration; it does not guarantee storage integrity.",
+  "required": [
+    "id",
+    "recordNature",
+    "sourceTier",
+    "recordVersion",
+    "updatedAt",
+    "entityId",
+    "sequence",
+    "eventType",
+    "actorRole",
+    "occurredAt",
+    "summary",
+    "previousHash",
+    "payloadHash"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "recordNature": {
+      "const": "SYNTHETIC_DEMONSTRATION"
+    },
+    "sourceTier": {
+      "enum": [
+        "SYNTHETIC_DEMO",
+        "COMMUNITY_REFERENCE",
+        "OFFICIAL_SOURCE_PENDING"
+      ]
+    },
+    "recordVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "entityId": {
+      "type": "string",
+      "pattern": "^SYN-DEMO-[A-Z0-9][A-Z0-9-]*$"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "eventType": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z_]+$"
+    },
+    "actorRole": {
+      "enum": [
+        "public",
+        "citizen",
+        "authority",
+        "moderator",
+        "independent_reviewer",
+        "demo_admin",
+        "system"
+      ]
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "previousHash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "payloadHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

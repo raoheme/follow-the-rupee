@@ -1,0 +1,116 @@
+{
+  "machineId": "ISSUE",
+  "version": "1.2.3",
+  "transitions": [
+    {
+      "from": "DRAFT_LOCAL",
+      "to": "SUBMITTED_UNVERIFIED",
+      "allowedRoles": [
+        "citizen",
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "ISSUE_SUBMITTED_UNVERIFIED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "SUBMITTED_UNVERIFIED",
+      "to": "TRIAGED_ASSIGNED",
+      "allowedRoles": [
+        "citizen",
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "ISSUE_TRIAGED_ASSIGNED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "TRIAGED_ASSIGNED",
+      "to": "IN_PROGRESS",
+      "allowedRoles": [
+        "citizen",
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "ISSUE_IN_PROGRESS",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "IN_PROGRESS",
+      "to": "CLOSURE_CLAIMED_PENDING_VERIFICATION",
+      "allowedRoles": [
+        "citizen",
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "ISSUE_CLOSURE_CLAIMED_PENDING_VERIFICATION",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "CLOSURE_CLAIMED_PENDING_VERIFICATION",
+      "to": "VERIFIED_COMPLETE",
+      "allowedRoles": [
+        "citizen",
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "ISSUE_VERIFIED_COMPLETE",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "CLOSURE_CLAIMED_PENDING_VERIFICATION",
+      "to": "DISPUTED_REOPENED",
+      "allowedRoles": [
+        "citizen",
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "ISSUE_DISPUTED_REOPENED",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    },
+    {
+      "from": "DISPUTED_REOPENED",
+      "to": "IN_PROGRESS",
+      "allowedRoles": [
+        "citizen",
+        "authority"
+      ],
+      "preconditions": [
+        "validated command"
+      ],
+      "requiredEvidence": [],
+      "emittedEvent": "ISSUE_IN_PROGRESS",
+      "idempotency": "REQUIRED",
+      "concurrency": "RECORD_VERSION_REQUIRED"
+    }
+  ],
+  "childIssueCreation": {
+    "sourceState": "VERIFIED_COMPLETE",
+    "newChildInitialState": "SUBMITTED_UNVERIFIED",
+    "requiredLink": "parentRecurrenceId"
+  }
+}

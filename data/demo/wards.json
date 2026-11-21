@@ -1,0 +1,125 @@
+[
+  {
+    "id": "SYN-DEMO-WARD-KW",
+    "code": "K/W",
+    "displayName": "K/West Ward",
+    "localityLabel": "Andheri West synthetic civic context (S.V. Road Junction, Paliram Road, JP Road Metro Corridor)",
+    "role": "PRIMARY_DEMONSTRATION",
+    "electedOversightNote": "Deliberative ward-committee oversight only; engineering execution rests with departmental posts.",
+    "boundary": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            72.826,
+            19.114
+          ],
+          [
+            72.84,
+            19.114
+          ],
+          [
+            72.84,
+            19.126
+          ],
+          [
+            72.826,
+            19.126
+          ],
+          [
+            72.826,
+            19.114
+          ]
+        ]
+      ]
+    },
+    "boundaryNature": "SYNTHETIC_ILLUSTRATIVE_BOX",
+    "boundaryNote": "Illustrative box for the demonstration, not an official ward boundary.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-WARD-GN",
+    "code": "G/N",
+    "displayName": "G/North Ward (scale preview)",
+    "localityLabel": "Dharavi locality label, synthetic scale-preview only",
+    "role": "SCALE_PREVIEW",
+    "electedOversightNote": "Deliberative ward-committee oversight only; engineering execution rests with departmental posts.",
+    "boundary": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            72.848,
+            19.038
+          ],
+          [
+            72.86,
+            19.038
+          ],
+          [
+            72.86,
+            19.05
+          ],
+          [
+            72.848,
+            19.05
+          ],
+          [
+            72.848,
+            19.038
+          ]
+        ]
+      ]
+    },
+    "boundaryNature": "SYNTHETIC_ILLUSTRATIVE_BOX",
+    "boundaryNote": "Illustrative box for the demonstration, not an official ward boundary.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  },
+  {
+    "id": "SYN-DEMO-WARD-ME",
+    "code": "M/E",
+    "displayName": "M/East Ward (scale preview)",
+    "localityLabel": "Govandi locality label, synthetic scale-preview only",
+    "role": "SCALE_PREVIEW",
+    "electedOversightNote": "Deliberative ward-committee oversight only; engineering execution rests with departmental posts.",
+    "boundary": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            72.918,
+            19.047
+          ],
+          [
+            72.932,
+            19.047
+          ],
+          [
+            72.932,
+            19.06
+          ],
+          [
+            72.918,
+            19.06
+          ],
+          [
+            72.918,
+            19.047
+          ]
+        ]
+      ]
+    },
+    "boundaryNature": "SYNTHETIC_ILLUSTRATIVE_BOX",
+    "boundaryNote": "Illustrative box for the demonstration, not an official ward boundary.",
+    "recordNature": "SYNTHETIC_DEMONSTRATION",
+    "sourceTier": "SYNTHETIC_DEMO",
+    "recordVersion": 1,
+    "updatedAt": "2026-11-20T08:30:00Z"
+  }
+]
